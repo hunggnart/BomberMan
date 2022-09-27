@@ -13,7 +13,7 @@ import java.util.List;
 public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
-    public int max_bombNum = 3;
+    public int max_bombNum = 2;
     List<Bomb> bombs = new ArrayList<>();
 
     public Player(GamePanel gp, KeyHandler keyH) {
