@@ -1,5 +1,6 @@
 package main;
 
+import Entity.Bomb;
 import Entity.Player;
 import Tiles.TileManager;
 
@@ -7,8 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
-    final int originalTileSize = 16;
-    final int scale = 3;
+    public final int originalTileSize = 16;
+    public final int scale = 2;
 
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 31;
@@ -17,12 +18,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenHeight = tileSize * maxScreenRow;
 
     final int FPS = 60;
-
-    int playerX = 100;
-    int playerY = 100;
-
-    int playerSpeed = 6;
-
+    //Khoi tao doi tuong game
     KeyHandler keyH = new KeyHandler();
 
     Player player = new Player(this, keyH);
@@ -74,7 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-       player.update();
+        player.update();
     }
 
     public void paintComponent(Graphics g) {
