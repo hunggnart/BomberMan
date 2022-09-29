@@ -3,11 +3,8 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import Entity.Bomb;
-
 public class KeyHandler implements KeyListener {
-    public boolean upPress, downPress, leftPress, rightPress, spacePress;
-
+    public boolean upPress, downPress, leftPress, rightPress;
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -15,48 +12,42 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode();
-        if (code == KeyEvent.VK_SPACE) {
-            spacePress = true;
-        }
-        if (code == KeyEvent.VK_W) {
+        int code =  e.getKeyCode();
+
+        if(code == KeyEvent.VK_W){
             upPress = true;
         }
 
-        if (code == KeyEvent.VK_S) {
+        if(code == KeyEvent.VK_S){
             downPress = true;
         }
 
-        if (code == KeyEvent.VK_A) {
+        if(code == KeyEvent.VK_A){
             leftPress = true;
         }
 
-        if (code == KeyEvent.VK_D) {
+        if(code == KeyEvent.VK_D){
             rightPress = true;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        int code = e.getKeyCode();
+        int code =  e.getKeyCode();
 
-        if (code == KeyEvent.VK_SPACE) {
-            spacePress = false;
-        }
-
-        if (code == KeyEvent.VK_W) {
+        if(code == KeyEvent.VK_W){
             upPress = false;
         }
 
-        if (code == KeyEvent.VK_S) {
+        if(code == KeyEvent.VK_S){
             downPress = false;
         }
 
-        if (code == KeyEvent.VK_A) {
+        if(code == KeyEvent.VK_A){
             leftPress = false;
         }
 
-        if (code == KeyEvent.VK_D) {
+        if(code == KeyEvent.VK_D){
             rightPress = false;
         }
     }

@@ -1,15 +1,16 @@
 package main;
 
-import Entity.Bomb;
+import Entity.Enemy;
 import Entity.Player;
+import Enemy.EnemyContronler;
 import Tiles.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
-    public final int originalTileSize = 16;
-    public final int scale = 2;
+    final int originalTileSize = 16;
+    public final int scale = 4;
 
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 31;
@@ -18,10 +19,11 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenHeight = tileSize * maxScreenRow;
 
     final int FPS = 60;
-    //Khoi tao doi tuong game
     KeyHandler keyH = new KeyHandler();
 
     Player player = new Player(this, keyH);
+
+    public EnemyContronler enemyC = new EnemyContronler(this);
 
     TileManager tileM = new TileManager(this);
 
@@ -70,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
+        enemyC.enemiesUpdate();
         player.update();
     }
 
@@ -82,6 +85,8 @@ public class GamePanel extends JPanel implements Runnable {
         tileM.draw(g2);
 
         player.draw(g2);
+
+        enemyC.enemysRender(g2);
 
         g2.dispose();
     }

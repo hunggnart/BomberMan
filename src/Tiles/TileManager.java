@@ -31,7 +31,6 @@ public class TileManager {
                 String data = myReader.nextLine();
                 for (int j = 0; j < gp.maxScreenCol; j++) {
                     mapTileMark = String.valueOf(data.charAt(j));
-
                     switch (mapTileMark) {
                         case "#":
                             mapTileNum[i][j] = 3;
@@ -45,7 +44,14 @@ public class TileManager {
                         case " ":
                             mapTileNum[i][j] = 1;
                             break;
-
+                        case "1":
+                            gp.enemyC.enemiesInit(i,j,mapTileMark);
+                            mapTileNum[i][j] = 1;
+                            break;
+                        case "2":
+                            gp.enemyC.enemiesInit(i,j,mapTileMark);
+                            mapTileNum[i][j] = 1;
+                            break;
                     }
                 }
             }
@@ -76,7 +82,7 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2) {
-//        g2.drawImage(tile[0].img, 0 , 0, gp.tileSize, gp.tileSize, null);
+
         int col = 0;
         int row = 0;
         int x = 0;
