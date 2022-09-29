@@ -20,7 +20,14 @@ public class Player extends Entity {
         setDefaulValues();
         getPlayerImage();
 
-        solidArea = new Rectangle(5 * gp.scale, 7 * gp.scale, 6 * gp.scale, 7 * gp.scale);
+        solidArea = new Rectangle();
+        solidArea.x = 5 * gp.scale;
+        solidArea.y = 7 * gp.scale;
+        solidAreaDefaulX = solidArea.x;
+        solidAreaDefaulY = solidArea.y;
+        solidArea.width = 6 * gp.scale;
+        solidArea.height = 7 * gp.scale;
+
     }
 
     public void setDefaulValues() {
@@ -56,7 +63,7 @@ public class Player extends Entity {
                 direction = "up";
             } else if (keyH.rightPress) {
                 direction = "right";
-            } else if(keyH.downPress) {
+            } else if (keyH.downPress) {
                 direction = "down";
             } else if (keyH.leftPress) {
                 direction = "left";
@@ -65,6 +72,9 @@ public class Player extends Entity {
             //Check collision Tile
             collisionOn = false;
             gp.cChecker.checkTile(this);
+
+            // Check enemy
+            int enemyIndex =  gp.cChecker.CheckEnemy(this, true);
 
             //If collisionOn is false
 

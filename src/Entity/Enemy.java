@@ -30,6 +30,8 @@ public class Enemy extends Entity {
 
     public void setDefaulValue() {
         solidArea = new Rectangle(1, 1, 14 * gp.scale, 14 * gp.scale);
+        solidAreaDefaulX = solidArea.x;
+        solidAreaDefaulY = solidArea.y;
         directionsNum = 0;
         directions = new String[4];
         directions[0] = "up";
