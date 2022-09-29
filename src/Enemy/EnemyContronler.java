@@ -13,7 +13,7 @@ import java.util.List;
 public class EnemyContronler {
     GamePanel gp;
 
-    List<Enemy> enemies = new ArrayList<Enemy>();
+    public List<Enemy> enemies = new ArrayList<Enemy>();
 
     int enemiesTotal;
 
