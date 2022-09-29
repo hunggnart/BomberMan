@@ -1,5 +1,6 @@
 package Entity;
 
+import Bomb.Bomb;
 import main.GamePanel;
 import main.KeyHandler;
 
@@ -7,12 +8,16 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
     public BufferedImage up, up1, up2, down, down1, down2, left, left1, left2, right, right1, right2;
+    public int max_bombNum = 2;
+    List<Bomb> bombs = new ArrayList<>();
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -21,6 +26,13 @@ public class Player extends Entity {
         getPlayerImage();
 
         solidArea = new Rectangle(5 * gp.scale, 7 * gp.scale, 6 * gp.scale, 7 * gp.scale);
+        initBombs();
+    }
+
+    public void initBombs() {
+        for(int i=0;i<max_bombNum;i++) {
+            bombs.add(new Bomb(gp));
+        }
     }
 
     public void setDefaulValues() {
@@ -94,6 +106,32 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
+
+        //place bomb
+        if(keyH.spacePress) {
+            placeBomb(bombs);
+            keyH.spacePress=false;
+        }
+        //update bomb;
+        for (int i = 0; i < bombs.size(); i++) {
+            if (bombs.get(i).isPlaced) {
+                bombs.get(i).update();
+            }
+        }
+    }
+
+    //Dat bom
+    public void placeBomb(List<Bomb> bombs) {
+        if (bombs != null) {
+            for(int i=0;i<bombs.size();i++) {
+                if(!bombs.get(i).isPlaced){
+                    bombs.get(i).isPlaced = true;
+                    bombs.get(i).bombX = ((this.x + gp.tileSize / 2) / gp.tileSize) * gp.tileSize;
+                    bombs.get(i).bombY = ((this.y + gp.tileSize / 2) / gp.tileSize) * gp.tileSize;
+                    break;
+                }
+            }
+        }
     }
 
     public void draw(Graphics2D g2) {
@@ -144,6 +182,12 @@ public class Player extends Entity {
                 }
                 break;
         }
+
         g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        for (int i = 0; i < max_bombNum; i++) {
+            if (bombs != null && bombs.get(i).isPlaced) {
+                bombs.get(i).draw(g2);
+            }
+        }
     }
 }
