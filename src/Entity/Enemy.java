@@ -19,6 +19,7 @@ public class Enemy extends Entity {
     Random generator = new Random();
 
     int directionsNum = 0;
+    public boolean isDead = false;
 
     public BufferedImage up, up1, up2, left, left1, left2, right, right1, right2, down, down1, down2;
 

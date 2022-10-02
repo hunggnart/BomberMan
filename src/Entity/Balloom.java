@@ -42,10 +42,16 @@ public class Balloom extends Enemy {
     }
 
     public void update() {
+        //Check Flame
+        isDead = gp.cChecker.checkEnemyVsFlame(this);
+        if (isDead) {
+            gp.explode.endInit(this.x, this.y);
+        }
         //Check collision Tile
         collisionOn = false;
         gp.cChecker.checkTile(this);
-
+        //Check bomb
+        gp.cChecker.checkBombVsEnemy(this);
         //If collisionOn is true
         if (collisionOn) {
             directionsNum = generator.nextInt(4) + 0;
@@ -68,17 +74,15 @@ public class Balloom extends Enemy {
                     x -= speed;
                     break;
             }
-        }
 
-        spriteCounter++;
-        if (spriteCounter > 10) {
-            spriteNum++;
-            if (spriteNum > 3) {
-                spriteNum = 1;
+            spriteCounter++;
+            if (spriteCounter > 10) {
+                spriteNum++;
+                if (spriteNum > 3) {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
             }
-            spriteCounter = 0;
         }
     }
-
-
 }

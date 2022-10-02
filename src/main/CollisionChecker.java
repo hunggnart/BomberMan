@@ -1,6 +1,9 @@
 package main;
 
+import Bomb.Flame;
 import Entity.Entity;
+import Entity.Player;
+import Entity.Enemy;
 
 public class CollisionChecker {
 
@@ -66,9 +69,7 @@ public class CollisionChecker {
         }
     }
 
-    public int CheckEnemy(Entity entity, boolean player) {
-        int index = 999;
-
+    public void checkEnemy(Entity entity, boolean player) {
         for (int i = 0; i < gp.enemyC.enemies.size(); i++) {
 
             // get Entity solid area
@@ -112,12 +113,317 @@ public class CollisionChecker {
                     }
                     break;
             }
+
             entity.solidArea.x = entity.solidAreaDefaulX;
             entity.solidArea.y = entity.solidAreaDefaulY;
             gp.enemyC.enemies.get(i).solidArea.x = gp.enemyC.enemies.get(i).solidAreaDefaulX;
             gp.enemyC.enemies.get(i).solidArea.y = gp.enemyC.enemies.get(i).solidAreaDefaulY;
 
         }
-        return index;
     }
+
+    public void checkBombVsEnemy(Enemy entity) {
+        for (int i = 0; i < gp.bomdC.bombsToltal; i++) {
+
+            // get Entity solid area
+            entity.solidArea.x = entity.x + entity.solidArea.x;
+            entity.solidArea.y = entity.y + entity.solidArea.y;
+
+            // get Bomb solid area
+
+            gp.bomdC.bombs.get(i).solidArea.x = gp.bomdC.bombs.get(i).solidArea.x
+                    + gp.bomdC.bombs.get(i).x;
+            gp.bomdC.bombs.get(i).solidArea.y = gp.bomdC.bombs.get(i).solidArea.y
+                    + gp.bomdC.bombs.get(i).y;
+
+            switch (entity.direction) {
+                case "up":
+                    entity.solidArea.y -= entity.speed;
+                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                        entity.collisionOn = true;
+                    }
+                    break;
+                case "down":
+                    entity.solidArea.y += entity.speed;
+                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                        entity.collisionOn = true;
+                    }
+                    break;
+                case "left":
+                    entity.solidArea.x -= entity.speed;
+                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                        entity.collisionOn = true;
+                    }
+                    break;
+                case "right":
+                    entity.solidArea.x += entity.speed;
+                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                        entity.collisionOn = true;
+                    }
+                    break;
+            }
+            entity.solidArea.x = entity.solidAreaDefaulX;
+            entity.solidArea.y = entity.solidAreaDefaulY;
+            gp.bomdC.bombs.get(i).solidArea.x = gp.bomdC.bombs.get(i).solidAreaDefaulX;
+            gp.bomdC.bombs.get(i).solidArea.y = gp.bomdC.bombs.get(i).solidAreaDefaulY;
+        }
+    }
+
+    public void checkPlayerVsBomb(Player entity) {
+        for (int i = 0; i < gp.bomdC.bombsToltal; i++) {
+
+            // get Entity solid area
+            entity.solidArea.x = entity.x + entity.solidArea.x;
+            entity.solidArea.y = entity.y + entity.solidArea.y;
+
+            // get Bomb solid area
+
+            gp.bomdC.bombs.get(i).solidArea.x = gp.bomdC.bombs.get(i).solidArea.x
+                    + gp.bomdC.bombs.get(i).x;
+            gp.bomdC.bombs.get(i).solidArea.y = gp.bomdC.bombs.get(i).solidArea.y
+                    + gp.bomdC.bombs.get(i).y;
+
+            switch (entity.direction) {
+                case "up":
+                    entity.solidArea.y -= entity.speed;
+                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                        if (gp.bomdC.bombs.get(i).newBomb) {
+                            entity.collisionOn = false;
+                        } else {
+                            entity.collisionOn = true;
+                        }
+                    } else {
+                        gp.bomdC.bombs.get(i).newBomb = false;
+                    }
+                    break;
+                case "down":
+                    entity.solidArea.y += entity.speed;
+                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                        if (gp.bomdC.bombs.get(i).newBomb) {
+                            entity.collisionOn = false;
+                        } else {
+                            entity.collisionOn = true;
+                        }
+                    } else {
+                        gp.bomdC.bombs.get(i).newBomb = false;
+                    }
+                    break;
+                case "left":
+                    entity.solidArea.x -= entity.speed;
+                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                        if (gp.bomdC.bombs.get(i).newBomb) {
+                            entity.collisionOn = false;
+                        } else {
+                            entity.collisionOn = true;
+                        }
+                    } else {
+                        gp.bomdC.bombs.get(i).newBomb = false;
+                    }
+                    break;
+                case "right":
+                    entity.solidArea.x += entity.speed;
+                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                        if (gp.bomdC.bombs.get(i).newBomb) {
+                            entity.collisionOn = false;
+                        } else {
+                            entity.collisionOn = true;
+                        }
+
+                    } else {
+                        gp.bomdC.bombs.get(i).newBomb = false;
+                    }
+                    break;
+            }
+            entity.solidArea.x = entity.solidAreaDefaulX;
+            entity.solidArea.y = entity.solidAreaDefaulY;
+            gp.bomdC.bombs.get(i).solidArea.x = gp.bomdC.bombs.get(i).solidAreaDefaulX;
+            gp.bomdC.bombs.get(i).solidArea.y = gp.bomdC.bombs.get(i).solidAreaDefaulY;
+        }
+    }
+
+    public int[] checkFlameVsTile(Flame flame) {
+        int[] rs = new int[4];
+
+        for (int i = 0; i < 4; i++) {
+            rs[i] = 99;
+        }
+
+        for (int i = 0; i <= flame.flameLong; i++) {
+            int rowRightFlame = flame.flameY / gp.tileSize;
+            int colRightFlame = (flame.flameX + i * gp.tileSize) / gp.tileSize;
+            int rowLeftFlame = flame.flameY / gp.tileSize;
+            int colLeftFlame = (flame.flameX - i * gp.tileSize) / gp.tileSize;
+            int rowUpFlame = (flame.flameY - i * gp.tileSize) / gp.tileSize;
+            int colUpFlame = flame.flameX / gp.tileSize;
+            int rowDownFlame = (flame.flameY + i * gp.tileSize) / gp.tileSize;
+            int colDownFlame = flame.flameX / gp.tileSize;
+
+            if (rowLeftFlame < 0) {
+                rowLeftFlame = 0;
+            }
+            if (colLeftFlame < 0) {
+                colLeftFlame = 0;
+            }
+            if (rowRightFlame > gp.maxScreenRow - 1) {
+                rowRightFlame = gp.maxScreenRow - 1;
+            }
+            if (colRightFlame > gp.maxScreenCol - 1) {
+                colRightFlame = gp.maxScreenCol - 1;
+            }
+            if (rowUpFlame < 0) {
+                rowUpFlame = 0;
+            }
+            if (colUpFlame < 0) {
+                colUpFlame = 0;
+            }
+            if (rowDownFlame > gp.maxScreenRow - 1) {
+                rowDownFlame = gp.maxScreenRow - 1;
+            }
+            if (colDownFlame > gp.maxScreenCol - 1) {
+                colDownFlame = gp.maxScreenCol - 1;
+            }
+
+            int tileNumUp = gp.tileM.mapTileNum[rowUpFlame][colUpFlame];
+            int tileNumDown = gp.tileM.mapTileNum[rowDownFlame][colDownFlame];
+            int tileNumRight = gp.tileM.mapTileNum[rowRightFlame][colRightFlame];
+            int tileNumLeft = gp.tileM.mapTileNum[rowLeftFlame][colLeftFlame];
+
+            if (gp.tileM.tile[tileNumUp].conclusion) {
+                if (rs[0] == 99) {
+                    rs[0] = i - 1;
+                    if (gp.tileM.tile[tileNumUp].canBreak) {
+                        gp.explode.breakInit(colUpFlame * gp.tileSize, rowUpFlame * gp.tileSize);
+                        gp.tileM.mapTileNum[rowUpFlame][colUpFlame] = 1;
+                    }
+                }
+            }
+
+            if (gp.tileM.tile[tileNumRight].conclusion) {
+                if (rs[1] == 99) {
+                    rs[1] = i - 1;
+                    if (gp.tileM.tile[tileNumRight].canBreak) {
+                        gp.explode.breakInit(colRightFlame * gp.tileSize, rowRightFlame * gp.tileSize);
+                        gp.tileM.mapTileNum[rowRightFlame][colRightFlame] = 1;
+                    }
+                }
+            }
+
+            if (gp.tileM.tile[tileNumDown].conclusion) {
+                if (rs[2] == 99) {
+                    rs[2] = i - 1;
+                    if (gp.tileM.tile[tileNumDown].canBreak) {
+                        gp.explode.breakInit(colDownFlame * gp.tileSize, rowDownFlame * gp.tileSize);
+                        gp.tileM.mapTileNum[rowDownFlame][colDownFlame] = 1;
+                    }
+                }
+            }
+
+            if (gp.tileM.tile[tileNumLeft].conclusion) {
+                if (rs[3] == 99) {
+                    rs[3] = i - 1;
+                    if (gp.tileM.tile[tileNumLeft].canBreak) {
+                        gp.explode.breakInit(colLeftFlame * gp.tileSize, rowLeftFlame * gp.tileSize);
+                        gp.tileM.mapTileNum[rowLeftFlame][colLeftFlame] = 1;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (rs[i] == 99) {
+                rs[i] = flame.flameLong;
+            }
+        }
+
+        return rs;
+    }
+
+    public Boolean checkEnemyVsFlame(Enemy enemy) {
+
+        int colTopLeftPlayer = enemy.x / gp.tileSize;
+        int rowTopLeftPlayer = enemy.y / gp.tileSize;
+        int colTopRightPlayer = colTopLeftPlayer + 1;
+        int rowTopRightPlayer = rowTopLeftPlayer;
+        int colBottomLeftPlayer = colTopLeftPlayer;
+        int rowBottomLeftPlayer = rowTopLeftPlayer + 1;
+        int colBottomRightPlayer = colTopLeftPlayer + 1;
+        int rowBottomRightPlayer = rowTopLeftPlayer + 1;
+
+        for (int i = 0; i < gp.bomdC.flames.size(); i++) {
+
+            for (int j = 1; j <= gp.bomdC.flames.get(i).check[0]; j++) {
+                int rowUpFlame = (gp.bomdC.flames.get(i).flameY - j * gp.tileSize) / gp.tileSize;
+                int colUpFlame = gp.bomdC.flames.get(i).flameX / gp.tileSize;
+
+                if (colTopLeftPlayer == colUpFlame && rowTopLeftPlayer == rowUpFlame) {
+                    return true;
+                }
+                if (colTopRightPlayer == colUpFlame && rowTopRightPlayer == rowUpFlame) {
+                    return true;
+                }
+                if (colBottomLeftPlayer == colUpFlame && rowBottomLeftPlayer == rowUpFlame) {
+                    return true;
+                }
+                if (colBottomRightPlayer == colUpFlame && rowBottomRightPlayer == rowUpFlame) {
+                    return true;
+                }
+            }
+
+            for (int j = 1; j <= gp.bomdC.flames.get(i).check[1]; j++) {
+                int rowRightFlame = gp.bomdC.flames.get(i).flameY / gp.tileSize;
+                int colRightFlame = (gp.bomdC.flames.get(i).flameX + j * gp.tileSize) / gp.tileSize;
+
+                if (colTopLeftPlayer == colRightFlame && rowTopLeftPlayer == rowRightFlame) {
+                    return true;
+                }
+                if (colTopRightPlayer == colRightFlame && rowTopRightPlayer == rowRightFlame) {
+                    return true;
+                }
+                if (colBottomLeftPlayer == colRightFlame && rowBottomLeftPlayer == rowRightFlame) {
+                    return true;
+                }
+                if (colBottomRightPlayer == colRightFlame && rowBottomRightPlayer == rowRightFlame) {
+                    return true;
+                }
+            }
+
+            for (int j = 1; j <= gp.bomdC.flames.get(i).check[2]; j++) {
+                int rowDownFlame = (gp.bomdC.flames.get(i).flameY + j * gp.tileSize) / gp.tileSize;
+                int colDownFlame = gp.bomdC.flames.get(i).flameX / gp.tileSize;
+
+                if (colTopLeftPlayer == colDownFlame && rowTopLeftPlayer == rowDownFlame) {
+                    return true;
+                }
+                if (colTopRightPlayer == colDownFlame && rowTopRightPlayer == rowDownFlame) {
+                    return true;
+                }
+                if (colBottomLeftPlayer == colDownFlame && rowBottomLeftPlayer == rowDownFlame) {
+                    return true;
+                }
+                if (colBottomRightPlayer == colDownFlame && rowBottomRightPlayer == rowDownFlame) {
+                    return true;
+                }
+            }
+
+            for (int j = 1; j <= gp.bomdC.flames.get(i).check[3]; j++) {
+                int rowLeftFlame = gp.bomdC.flames.get(i).flameY / gp.tileSize;
+                int colLeftFlame = (gp.bomdC.flames.get(i).flameX - j * gp.tileSize) / gp.tileSize;
+
+                if (colTopLeftPlayer == colLeftFlame && rowTopLeftPlayer == rowLeftFlame) {
+                    return true;
+                }
+                if (colTopRightPlayer == colLeftFlame && rowTopRightPlayer == rowLeftFlame) {
+                    return true;
+                }
+                if (colBottomLeftPlayer == colLeftFlame && rowBottomLeftPlayer == rowLeftFlame) {
+                    return true;
+                }
+                if (colBottomRightPlayer == colLeftFlame && rowBottomRightPlayer == rowLeftFlame) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

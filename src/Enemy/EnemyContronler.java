@@ -45,8 +45,16 @@ public class EnemyContronler {
         }
     }
 
-    public void enemiesUpdate(){
+    public void enemiesUpdate() {
         for (int i = 0; i < enemiesTotal; i++) {
+            if (enemies.get(i).isDead) {
+                enemies.remove(i);
+                enemiesTotal--;
+                if (enemies.size() == 0) {
+                    return;
+                }
+                continue;
+            }
             enemies.get(i).update();
         }
     }

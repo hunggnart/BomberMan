@@ -1,8 +1,10 @@
 package main;
 
+import Bomb.BoomContronler;
 import Entity.Enemy;
 import Entity.Player;
 import Enemy.EnemyContronler;
+import Explode.Explode;
 import Tiles.TileManager;
 
 import javax.swing.*;
@@ -10,7 +12,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
-    public final int scale = 4;
+    public final int scale = 3;
 
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 31;
@@ -23,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     Player player = new Player(this, keyH);
 
+    public BoomContronler bomdC = new BoomContronler(this);
     public EnemyContronler enemyC = new EnemyContronler(this);
 
     TileManager tileM = new TileManager(this);
@@ -30,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
 
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public Explode explode = new Explode(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -72,8 +76,14 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
+
         enemyC.enemiesUpdate();
         player.update();
+        bomdC.updateBombs();
+        bomdC.updateFlames();
+        explode.updateBreaks();
+        explode.updateEnd();
+
     }
 
     public void paintComponent(Graphics g) {
@@ -83,10 +93,12 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
 
         tileM.draw(g2);
-
+        bomdC.drawBombs(g2);
+        bomdC.drawFlames(g2);
         player.draw(g2);
-
         enemyC.enemysRender(g2);
+        explode.drawBreaks(g2);
+        explode.drawEnd(g2);
 
         g2.dispose();
     }

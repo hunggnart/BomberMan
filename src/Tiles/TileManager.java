@@ -66,6 +66,7 @@ public class TileManager {
             tile[0] = new Tile();
             tile[0].img = ImageIO.read(getClass().getResourceAsStream("/tile/brick.png"));
             tile[0].conclusion = true;
+            tile[0].canBreak = true;
             tile[1] = new Tile();
             tile[1].img = ImageIO.read(getClass().getResourceAsStream("/tile/grass.png"));
             tile[1].conclusion = false;

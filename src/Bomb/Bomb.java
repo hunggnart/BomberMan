@@ -9,10 +9,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Bomb extends Entity {
-    public int bombX;
-    public int bombY;
+
     public boolean exploded = false;
-    public boolean isPlaced = false;
+    public boolean newBomb;
     int countToExplode, frameBomb = 0;
     BufferedImage bombImage, bombImage1, bombImage2;
     GamePanel gp;
@@ -20,6 +19,14 @@ public class Bomb extends Entity {
     public Bomb(GamePanel gp) {
         this.gp = gp;
         getBombImage();
+        setDefaulValueBomb();
+        newBomb = true;
+    }
+
+    public void setDefaulValueBomb() {
+        solidArea = new Rectangle(1, 1, 15 * gp.scale, 15 * gp.scale);
+        solidAreaDefaulX = solidArea.x;
+        solidAreaDefaulY = solidArea.y;
     }
 
     public void getBombImage() {
@@ -35,31 +42,27 @@ public class Bomb extends Entity {
     public void draw(Graphics2D g2) {
         BufferedImage image = null;
         switch (spriteNum) {
-            case 0:
+            case 1:
                 image = bombImage;
                 break;
-            case 1:
+            case 2:
                 image = bombImage1;
                 break;
-            case 2:
+            case 3:
                 image = bombImage2;
                 break;
         }
-        g2.drawImage(image, bombX, bombY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
     }
 
     public void update() {
         frameBomb++;
-        if (frameBomb > 60) {
+        if (frameBomb > 50) {
             countToExplode++;
             frameBomb = 0;
             if (countToExplode == 3) {
                 exploded = true;
                 countToExplode = 0;
-            }
-            if (exploded) {
-                isPlaced = false;
-                exploded = false;
             }
         }
 

@@ -39,10 +39,16 @@ public class Oneal extends Enemy {
     }
 
     public void update() {
+        //Check dead
+        isDead = gp.cChecker.checkEnemyVsFlame(this);
+        if (isDead) {
+            gp.explode.endInit(this.x, this.y);
+        }
         //Check collision Tile
         collisionOn = false;
         gp.cChecker.checkTile(this);
-
+        //Check bomb
+        gp.cChecker.checkBombVsEnemy(this);
         //If collisionOn = true;
 
         if (collisionOn) {
@@ -68,15 +74,16 @@ public class Oneal extends Enemy {
                     x -= speed;
                     break;
             }
-        }
 
-        spriteCounter++;
-        if (spriteCounter > 10) {
-            spriteNum++;
-            if (spriteNum > 3) {
-                spriteNum = 1;
+            spriteCounter++;
+            if (spriteCounter > 10) {
+                spriteNum++;
+                if (spriteNum > 3) {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
             }
-            spriteCounter = 0;
+
         }
 
         directionCounter++;
@@ -87,5 +94,4 @@ public class Oneal extends Enemy {
             directionCounter = 0;
         }
     }
-
 }
