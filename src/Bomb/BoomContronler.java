@@ -11,7 +11,8 @@ public class BoomContronler {
     GamePanel gp;
     public List<Bomb> bombs = new ArrayList<Bomb>();
     public List<Flame> flames = new ArrayList<Flame>();
-    int maxBombs = 12;
+    public int maxBombs = 1;
+    public int flameLong = 1;
 
     public int bombsToltal = 0;
     public int flamesToltal = 0;
@@ -34,7 +35,7 @@ public class BoomContronler {
     }
 
     public void flameInit(int x, int y) {
-        Flame f = new Flame(gp);
+        Flame f = new Flame(gp, flameLong);
         f.flameX = x;
         f.flameY = y;
         f.flame_right_x = x + gp.tileSize * f.flameLong;

@@ -15,7 +15,6 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
     public BufferedImage up, up1, up2, down, down1, down2, left, left1, left2, right, right1, right2;
-    public int max_bombNum = 2;
     List<Bomb> bombs = new ArrayList<>();
     boolean placeBombTurn = false;
 
@@ -24,13 +23,6 @@ public class Player extends Entity {
         this.keyH = keyH;
         setDefaulValues();
         getPlayerImage();
-        initBombs();
-    }
-
-    public void initBombs() {
-        for (int i = 0; i < max_bombNum; i++) {
-            bombs.add(new Bomb(gp));
-        }
     }
 
     public void setDefaulValues() {
@@ -39,7 +31,7 @@ public class Player extends Entity {
         solidAreaDefaulY = solidArea.y;
         x = gp.tileSize;
         y = gp.tileSize;
-        speed = 2;
+        speed = 1;
         direction = "down";
     }
 
@@ -77,6 +69,7 @@ public class Player extends Entity {
 
             //Check collision
             collisionOn = false;
+            gp.cChecker.CheckPlayerVsItem(this);
             gp.cChecker.checkPlayerVsBomb(this);
             gp.cChecker.checkTile(this);
             gp.cChecker.checkEnemy(this, true);

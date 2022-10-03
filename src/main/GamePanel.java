@@ -5,6 +5,7 @@ import Entity.Enemy;
 import Entity.Player;
 import Enemy.EnemyContronler;
 import Explode.Explode;
+import Item.ItemContronler;
 import Tiles.TileManager;
 
 import javax.swing.*;
@@ -22,14 +23,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     final int FPS = 60;
     KeyHandler keyH = new KeyHandler();
-
     Player player = new Player(this, keyH);
-
     public BoomContronler bomdC = new BoomContronler(this);
     public EnemyContronler enemyC = new EnemyContronler(this);
-
     TileManager tileM = new TileManager(this);
-
+    ItemContronler itemC = new ItemContronler(this);
     Thread gameThread;
 
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -45,7 +43,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void startGameThread() {
         gameThread = new Thread(this);
-
         gameThread.start();
     }
 
@@ -81,6 +78,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.update();
         bomdC.updateBombs();
         bomdC.updateFlames();
+        itemC.updateItems();
         explode.updateBreaks();
         explode.updateEnd();
 
@@ -95,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable {
         tileM.draw(g2);
         bomdC.drawBombs(g2);
         bomdC.drawFlames(g2);
+        itemC.drawItem(g2);
         player.draw(g2);
         enemyC.enemysRender(g2);
         explode.drawBreaks(g2);

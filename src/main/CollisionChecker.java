@@ -4,6 +4,9 @@ import Bomb.Flame;
 import Entity.Entity;
 import Entity.Player;
 import Entity.Enemy;
+import Item.ItemBomb;
+import Item.ItemFlame;
+import Item.ItemSpeed;
 
 public class CollisionChecker {
 
@@ -293,6 +296,7 @@ public class CollisionChecker {
                     rs[0] = i - 1;
                     if (gp.tileM.tile[tileNumUp].canBreak) {
                         gp.explode.breakInit(colUpFlame * gp.tileSize, rowUpFlame * gp.tileSize);
+                        gp.itemC.initItems(colUpFlame * gp.tileSize, rowUpFlame * gp.tileSize);
                         gp.tileM.mapTileNum[rowUpFlame][colUpFlame] = 1;
                     }
                 }
@@ -303,6 +307,7 @@ public class CollisionChecker {
                     rs[1] = i - 1;
                     if (gp.tileM.tile[tileNumRight].canBreak) {
                         gp.explode.breakInit(colRightFlame * gp.tileSize, rowRightFlame * gp.tileSize);
+                        gp.itemC.initItems(colRightFlame * gp.tileSize, rowRightFlame * gp.tileSize);
                         gp.tileM.mapTileNum[rowRightFlame][colRightFlame] = 1;
                     }
                 }
@@ -313,6 +318,7 @@ public class CollisionChecker {
                     rs[2] = i - 1;
                     if (gp.tileM.tile[tileNumDown].canBreak) {
                         gp.explode.breakInit(colDownFlame * gp.tileSize, rowDownFlame * gp.tileSize);
+                        gp.itemC.initItems(colDownFlame * gp.tileSize, rowDownFlame * gp.tileSize);
                         gp.tileM.mapTileNum[rowDownFlame][colDownFlame] = 1;
                     }
                 }
@@ -424,6 +430,97 @@ public class CollisionChecker {
             }
         }
         return false;
+    }
+
+    public void CheckPlayerVsItem(Player entity) {
+        for (int i = 0; i < gp.itemC.items.size(); i++) {
+
+            // get Entity solid area
+            entity.solidArea.x = entity.x + entity.solidArea.x;
+            entity.solidArea.y = entity.y + entity.solidArea.y;
+
+            // get Bomb solid area
+
+            gp.itemC.items.get(i).solidArea.x = gp.itemC.items.get(i).solidArea.x
+                    + gp.itemC.items.get(i).x;
+            gp.itemC.items.get(i).solidArea.y = gp.itemC.items.get(i).solidArea.y
+                    + gp.itemC.items.get(i).y;
+
+            switch (entity.direction) {
+                case "up":
+                    entity.solidArea.y -= entity.speed;
+                    if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
+                        if (gp.itemC.items.get(i) instanceof ItemBomb) {
+                            gp.bomdC.maxBombs++;
+                            gp.itemC.items.get(i).update();
+                        }
+                        if (gp.itemC.items.get(i) instanceof ItemFlame) {
+                            gp.bomdC.flameLong++;
+                            gp.itemC.items.get(i).update();
+                        }
+                        if (gp.itemC.items.get(i) instanceof ItemSpeed) {
+                            entity.speed++;
+                            gp.itemC.items.get(i).update();
+                        }
+                    }
+                    break;
+                case "down":
+                    entity.solidArea.y += entity.speed;
+                    if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
+                        if (gp.itemC.items.get(i) instanceof ItemBomb) {
+                            gp.bomdC.maxBombs++;
+                            gp.itemC.items.get(i).update();
+                        }
+                        if (gp.itemC.items.get(i) instanceof ItemFlame) {
+                            gp.bomdC.flameLong++;
+                            gp.itemC.items.get(i).update();
+                        }
+                        if (gp.itemC.items.get(i) instanceof ItemSpeed) {
+                            entity.speed++;
+                            gp.itemC.items.get(i).update();
+                        }
+                    }
+                    break;
+                case "left":
+                    entity.solidArea.x -= entity.speed;
+                    if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
+                        if (gp.itemC.items.get(i) instanceof ItemBomb) {
+                            gp.bomdC.maxBombs++;
+                            gp.itemC.items.get(i).update();
+                        }
+                        if (gp.itemC.items.get(i) instanceof ItemFlame) {
+                            gp.bomdC.flameLong++;
+                            gp.itemC.items.get(i).update();
+                        }
+                        if (gp.itemC.items.get(i) instanceof ItemSpeed) {
+                            entity.speed++;
+                            gp.itemC.items.get(i).update();
+                        }
+                    }
+                    break;
+                case "right":
+                    entity.solidArea.x += entity.speed;
+                    if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
+                        if (gp.itemC.items.get(i) instanceof ItemBomb) {
+                            gp.bomdC.maxBombs++;
+                            gp.itemC.items.get(i).update();
+                        }
+                        if (gp.itemC.items.get(i) instanceof ItemFlame) {
+                            gp.bomdC.flameLong++;
+                            gp.itemC.items.get(i).update();
+                        }
+                        if (gp.itemC.items.get(i) instanceof ItemSpeed) {
+                            entity.speed++;
+                            gp.itemC.items.get(i).update();
+                        }
+                    }
+                    break;
+            }
+            entity.solidArea.x = entity.solidAreaDefaulX;
+            entity.solidArea.y = entity.solidAreaDefaulY;
+            gp.itemC.items.get(i).solidArea.x = gp.itemC.items.get(i).solidAreaDefaulX;
+            gp.itemC.items.get(i).solidArea.y = gp.itemC.items.get(i).solidAreaDefaulY;
+        }
     }
 
 }
