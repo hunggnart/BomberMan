@@ -451,11 +451,11 @@ public class CollisionChecker {
                     entity.solidArea.y -= entity.speed;
                     if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
                         if (gp.itemC.items.get(i) instanceof ItemBomb) {
-                            gp.bomdC.maxBombs++;
+                            gp.bombM.maxBombs++;
                             gp.itemC.items.get(i).update();
                         }
                         if (gp.itemC.items.get(i) instanceof ItemFlame) {
-                            gp.bomdC.flameLong++;
+                            gp.bombM.flameLong++;
                             gp.itemC.items.get(i).update();
                         }
                         if (gp.itemC.items.get(i) instanceof ItemSpeed) {
@@ -468,11 +468,11 @@ public class CollisionChecker {
                     entity.solidArea.y += entity.speed;
                     if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
                         if (gp.itemC.items.get(i) instanceof ItemBomb) {
-                            gp.bomdC.maxBombs++;
+                            gp.bombM.maxBombs++;
                             gp.itemC.items.get(i).update();
                         }
                         if (gp.itemC.items.get(i) instanceof ItemFlame) {
-                            gp.bomdC.flameLong++;
+                            gp.bombM.flameLong++;
                             gp.itemC.items.get(i).update();
                         }
                         if (gp.itemC.items.get(i) instanceof ItemSpeed) {
@@ -485,11 +485,11 @@ public class CollisionChecker {
                     entity.solidArea.x -= entity.speed;
                     if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
                         if (gp.itemC.items.get(i) instanceof ItemBomb) {
-                            gp.bomdC.maxBombs++;
+                            gp.bombM.maxBombs++;
                             gp.itemC.items.get(i).update();
                         }
                         if (gp.itemC.items.get(i) instanceof ItemFlame) {
-                            gp.bomdC.flameLong++;
+                            gp.bombM.flameLong++;
                             gp.itemC.items.get(i).update();
                         }
                         if (gp.itemC.items.get(i) instanceof ItemSpeed) {
@@ -502,11 +502,11 @@ public class CollisionChecker {
                     entity.solidArea.x += entity.speed;
                     if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
                         if (gp.itemC.items.get(i) instanceof ItemBomb) {
-                            gp.bomdC.maxBombs++;
+                            gp.bombM.maxBombs++;
                             gp.itemC.items.get(i).update();
                         }
                         if (gp.itemC.items.get(i) instanceof ItemFlame) {
-                            gp.bomdC.flameLong++;
+                            gp.bombM.flameLong++;
                             gp.itemC.items.get(i).update();
                         }
                         if (gp.itemC.items.get(i) instanceof ItemSpeed) {

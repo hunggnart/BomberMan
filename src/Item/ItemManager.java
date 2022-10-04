@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ItemContronler {
+public class ItemManager {
     Random generator = new Random();
     GamePanel gp;
     public List<Item> items;
 
-    public ItemContronler(GamePanel gp) {
+    public ItemManager(GamePanel gp) {
         this.gp = gp;
         items = new ArrayList<Item>();
     }

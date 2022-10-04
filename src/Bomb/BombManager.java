@@ -10,7 +10,7 @@ public class BombManager {
     GamePanel gp;
     public List<Bomb> bombs = new ArrayList<Bomb>();
     public List<Flame> flames = new ArrayList<Flame>();
-    public int maxBombs = 1;
+    public int maxBombs = 5;
     public int flameLong = 1;
 
     public int TotalBomb = 0;

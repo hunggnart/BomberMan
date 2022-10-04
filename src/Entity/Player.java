@@ -31,7 +31,7 @@ public class Player extends Entity {
         solidAreaDefaulY = solidArea.y;
         x = gp.tileSize;
         y = gp.tileSize;
-        speed = 1;
+        speed = 3;
         direction = "down";
     }
 

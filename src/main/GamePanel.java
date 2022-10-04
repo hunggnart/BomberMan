@@ -4,6 +4,7 @@ import Bomb.BombManager;
 import Entity.Player;
 import Enemy.EnemyManager;
 import Explode.Explode;
+import Item.ItemManager;
 import Tiles.TileManager;
 
 import javax.swing.*;
@@ -38,9 +39,12 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
 
     Sound se = new Sound();
+
     Sound music = new Sound();
 
     UI ui=new UI(this);
+
+    ItemManager itemC = new ItemManager(this);
 
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Explode explode = new Explode(this);
