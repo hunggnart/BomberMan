@@ -52,7 +52,7 @@ public class Oneal extends Enemy {
         //If collisionOn = true;
 
         if (collisionOn) {
-            directionsNum = generator.nextInt(4) + 0;
+            directionsNum = generator.nextInt(4);
             direction = directions[directionsNum];
         }
 
@@ -88,7 +88,7 @@ public class Oneal extends Enemy {
 
         directionCounter++;
         if (directionCounter > 500) {
-            directionsNum = generator.nextInt(4) + 0;
+            directionsNum = generator.nextInt(4);
             speed = generator.nextInt(3) + 1;
             direction = directions[directionsNum];
             directionCounter = 0;

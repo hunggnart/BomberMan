@@ -21,15 +21,16 @@ public class Flame {
             flame_right_x, flame_right_y, flame_left_x, flame_left_y;
     public int frameCounter = 0;
     public int flameNum = 1;
-    public int flameLong = 2;
+    public int flameLong;
     public boolean flameStop = false;
 
     public int[] check;
     GamePanel gp;
 
-    public Flame(GamePanel gp) {
+    public Flame(GamePanel gp, int flameLong) {
         this.gp = gp;
         getImage();
+        this.flameLong = flameLong;
     }
 
     public void getImage() {
