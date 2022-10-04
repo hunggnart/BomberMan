@@ -1,9 +1,8 @@
 package main;
 
-import Bomb.BoomContronler;
-import Entity.Enemy;
+import Bomb.BombManager;
 import Entity.Player;
-import Enemy.EnemyContronler;
+import Enemy.EnemyManager;
 import Explode.Explode;
 import Tiles.TileManager;
 
@@ -12,7 +11,12 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
-    public final int scale = 3;
+    public final int scale = 2;
+    public final int menuState = 0;
+    public final int playState = 1;
+    public final int endState = 2;
+    public final int pauseState = 3;
+    public  int gameState = menuState;
 
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 31;
@@ -21,16 +25,22 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenHeight = tileSize * maxScreenRow;
 
     final int FPS = 60;
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
 
     Player player = new Player(this, keyH);
 
-    public BoomContronler bomdC = new BoomContronler(this);
-    public EnemyContronler enemyC = new EnemyContronler(this);
+    public BombManager bombM = new BombManager(this);
+
+    public EnemyManager enemyM = new EnemyManager(this);
 
     TileManager tileM = new TileManager(this);
 
     Thread gameThread;
+
+    Sound se = new Sound();
+    Sound music = new Sound();
+
+    UI ui=new UI(this);
 
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Explode explode = new Explode(this);
@@ -41,6 +51,10 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+    }
+
+    public void changeGameState(int newGameState) {
+        gameState=newGameState;
     }
 
     public void startGameThread() {
@@ -77,12 +91,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
-        enemyC.enemiesUpdate();
-        player.update();
-        bomdC.updateBombs();
-        bomdC.updateFlames();
-        explode.updateBreaks();
-        explode.updateEnd();
+        if(gameState==playState) {
+            enemyM.enemiesUpdate();
+            player.update();
+            bombM.updateBombs();
+            bombM.updateFlames();
+            explode.updateBreaks();
+            explode.updateEnd();
+        }
 
     }
 
@@ -92,14 +108,26 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        tileM.draw(g2);
-        bomdC.drawBombs(g2);
-        bomdC.drawFlames(g2);
-        player.draw(g2);
-        enemyC.enemysRender(g2);
-        explode.drawBreaks(g2);
-        explode.drawEnd(g2);
+        if(gameState==playState) {
+            ui.drawPlay(g2);
+        }
+        ui.draw(gameState,g2);
 
         g2.dispose();
+    }
+
+    public void playMusic(int i) {
+        music.setFile(i);
+        music.play();
+        music.loop();
+    }
+
+    public void stopMusic() {
+        music.stop();
+    }
+
+    public void playSe(int i) {
+        se.setFile(i);
+        se.play();
     }
 }

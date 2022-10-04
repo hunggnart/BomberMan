@@ -45,11 +45,11 @@ public class TileManager {
                             mapTileNum[i][j] = 1;
                             break;
                         case "1":
-                            gp.enemyC.enemiesInit(i,j,mapTileMark);
+                            gp.enemyM.enemiesInit(i,j,mapTileMark);
                             mapTileNum[i][j] = 1;
                             break;
                         case "2":
-                            gp.enemyC.enemiesInit(i,j,mapTileMark);
+                            gp.enemyM.enemiesInit(i,j,mapTileMark);
                             mapTileNum[i][j] = 1;
                             break;
                     }

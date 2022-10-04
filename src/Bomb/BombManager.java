@@ -1,36 +1,35 @@
 package Bomb;
 
-import Explode.Break;
 import main.GamePanel;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoomContronler {
+public class BombManager {
     GamePanel gp;
     public List<Bomb> bombs = new ArrayList<Bomb>();
     public List<Flame> flames = new ArrayList<Flame>();
     int maxBombs = 12;
 
-    public int bombsToltal = 0;
-    public int flamesToltal = 0;
+    public int TotalBomb = 0;
+    public int TotalFlame = 0;
 
-    public BoomContronler(GamePanel gp) {
+    public BombManager(GamePanel gp) {
         this.gp = gp;
         bombs = new ArrayList<Bomb>();
         flames = new ArrayList<Flame>();
     }
 
     public void bombInit(int x, int y) {
-        if (bombsToltal == maxBombs) {
+        if (TotalBomb == maxBombs) {
             return;
         }
         Bomb bomb = new Bomb(gp);
         bomb.x = ((x + gp.tileSize / 2) / gp.tileSize) * gp.tileSize;
         bomb.y = ((y + gp.tileSize / 2) / gp.tileSize) * gp.tileSize;
         bombs.add(bomb);
-        bombsToltal++;
+        TotalBomb++;
     }
 
     public void flameInit(int x, int y) {
@@ -47,28 +46,29 @@ public class BoomContronler {
         f.flame_down_y = y + gp.tileSize * f.flameLong;
         f.check = gp.cChecker.checkFlameVsTile(f);
         flames.add(f);
-        flamesToltal++;
+        TotalFlame++;
     }
 
     public void drawBombs(Graphics2D g2) {
-        for (int i = 0; i < bombsToltal; i++) {
+        for (int i = 0; i < TotalBomb; i++) {
             bombs.get(i).draw(g2);
         }
     }
 
     public void drawFlames(Graphics2D g2) {
-        for (int i = 0; i < flamesToltal; i++) {
+        for (int i = 0; i < TotalFlame; i++) {
             flames.get(i).draw(g2);
         }
     }
 
     public void updateBombs() {
-        for (int i = 0; i < bombsToltal; i++) {
+        for (int i = 0; i < TotalBomb; i++) {
             if (bombs.get(i).exploded) {
+                gp.playSe(5);
                 flameInit(bombs.get(i).x, bombs.get(i).y);
                 bombs.remove(i);
-                bombsToltal--;
-                if (bombsToltal == 0) {
+                TotalBomb--;
+                if (TotalBomb == 0) {
                     return;
                 }
             }
@@ -77,11 +77,11 @@ public class BoomContronler {
     }
 
     public void updateFlames() {
-        for (int i = 0; i < flamesToltal; i++) {
+        for (int i = 0; i < TotalFlame; i++) {
             if (flames.get(i).flameStop) {
                 flames.remove(i);
-                flamesToltal--;
-                if (flamesToltal == 0) {
+                TotalFlame--;
+                if (TotalFlame == 0) {
                     return;
                 }
             }

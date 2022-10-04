@@ -70,7 +70,7 @@ public class CollisionChecker {
     }
 
     public void checkEnemy(Entity entity, boolean player) {
-        for (int i = 0; i < gp.enemyC.enemies.size(); i++) {
+        for (int i = 0; i < gp.enemyM.enemies.size(); i++) {
 
             // get Entity solid area
             entity.solidArea.x = entity.x + entity.solidArea.x;
@@ -78,36 +78,36 @@ public class CollisionChecker {
 
             // get Enemy solid area
 
-            gp.enemyC.enemies.get(i).solidArea.x = gp.enemyC.enemies.get(i).solidArea.x
-                    + gp.enemyC.enemies.get(i).x;
-            gp.enemyC.enemies.get(i).solidArea.y = gp.enemyC.enemies.get(i).solidArea.y
-                    + gp.enemyC.enemies.get(i).y;
+            gp.enemyM.enemies.get(i).solidArea.x = gp.enemyM.enemies.get(i).solidArea.x
+                    + gp.enemyM.enemies.get(i).x;
+            gp.enemyM.enemies.get(i).solidArea.y = gp.enemyM.enemies.get(i).solidArea.y
+                    + gp.enemyM.enemies.get(i).y;
 
             switch (entity.direction) {
                 case "up":
                     entity.solidArea.y -= entity.speed;
-                    if (entity.solidArea.intersects(gp.enemyC.enemies.get(i).solidArea)) {
+                    if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
                         System.out.println("Game over!");
                     }
                     break;
                 case "down":
                     entity.solidArea.y += entity.speed;
-                    if (entity.solidArea.intersects(gp.enemyC.enemies.get(i).solidArea)) {
+                    if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
                         System.out.println("Game over!");
                     }
                     break;
                 case "left":
                     entity.solidArea.x -= entity.speed;
-                    if (entity.solidArea.intersects(gp.enemyC.enemies.get(i).solidArea)) {
+                    if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
                         System.out.println("Game over!");
                     }
                     break;
                 case "right":
                     entity.solidArea.x += entity.speed;
-                    if (entity.solidArea.intersects(gp.enemyC.enemies.get(i).solidArea)) {
+                    if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
                         System.out.println("Game over!");
                     }
@@ -116,14 +116,14 @@ public class CollisionChecker {
 
             entity.solidArea.x = entity.solidAreaDefaulX;
             entity.solidArea.y = entity.solidAreaDefaulY;
-            gp.enemyC.enemies.get(i).solidArea.x = gp.enemyC.enemies.get(i).solidAreaDefaulX;
-            gp.enemyC.enemies.get(i).solidArea.y = gp.enemyC.enemies.get(i).solidAreaDefaulY;
+            gp.enemyM.enemies.get(i).solidArea.x = gp.enemyM.enemies.get(i).solidAreaDefaulX;
+            gp.enemyM.enemies.get(i).solidArea.y = gp.enemyM.enemies.get(i).solidAreaDefaulY;
 
         }
     }
 
     public void checkBombVsEnemy(Enemy entity) {
-        for (int i = 0; i < gp.bomdC.bombsToltal; i++) {
+        for (int i = 0; i < gp.bombM.TotalBomb; i++) {
 
             // get Entity solid area
             entity.solidArea.x = entity.x + entity.solidArea.x;
@@ -131,46 +131,46 @@ public class CollisionChecker {
 
             // get Bomb solid area
 
-            gp.bomdC.bombs.get(i).solidArea.x = gp.bomdC.bombs.get(i).solidArea.x
-                    + gp.bomdC.bombs.get(i).x;
-            gp.bomdC.bombs.get(i).solidArea.y = gp.bomdC.bombs.get(i).solidArea.y
-                    + gp.bomdC.bombs.get(i).y;
+            gp.bombM.bombs.get(i).solidArea.x = gp.bombM.bombs.get(i).solidArea.x
+                    + gp.bombM.bombs.get(i).x;
+            gp.bombM.bombs.get(i).solidArea.y = gp.bombM.bombs.get(i).solidArea.y
+                    + gp.bombM.bombs.get(i).y;
 
             switch (entity.direction) {
                 case "up":
                     entity.solidArea.y -= entity.speed;
-                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                    if (entity.solidArea.intersects(gp.bombM.bombs.get(i).solidArea)) {
                         entity.collisionOn = true;
                     }
                     break;
                 case "down":
                     entity.solidArea.y += entity.speed;
-                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                    if (entity.solidArea.intersects(gp.bombM.bombs.get(i).solidArea)) {
                         entity.collisionOn = true;
                     }
                     break;
                 case "left":
                     entity.solidArea.x -= entity.speed;
-                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                    if (entity.solidArea.intersects(gp.bombM.bombs.get(i).solidArea)) {
                         entity.collisionOn = true;
                     }
                     break;
                 case "right":
                     entity.solidArea.x += entity.speed;
-                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
+                    if (entity.solidArea.intersects(gp.bombM.bombs.get(i).solidArea)) {
                         entity.collisionOn = true;
                     }
                     break;
             }
             entity.solidArea.x = entity.solidAreaDefaulX;
             entity.solidArea.y = entity.solidAreaDefaulY;
-            gp.bomdC.bombs.get(i).solidArea.x = gp.bomdC.bombs.get(i).solidAreaDefaulX;
-            gp.bomdC.bombs.get(i).solidArea.y = gp.bomdC.bombs.get(i).solidAreaDefaulY;
+            gp.bombM.bombs.get(i).solidArea.x = gp.bombM.bombs.get(i).solidAreaDefaulX;
+            gp.bombM.bombs.get(i).solidArea.y = gp.bombM.bombs.get(i).solidAreaDefaulY;
         }
     }
 
     public void checkPlayerVsBomb(Player entity) {
-        for (int i = 0; i < gp.bomdC.bombsToltal; i++) {
+        for (int i = 0; i < gp.bombM.TotalBomb; i++) {
 
             // get Entity solid area
             entity.solidArea.x = entity.x + entity.solidArea.x;
@@ -178,66 +178,66 @@ public class CollisionChecker {
 
             // get Bomb solid area
 
-            gp.bomdC.bombs.get(i).solidArea.x = gp.bomdC.bombs.get(i).solidArea.x
-                    + gp.bomdC.bombs.get(i).x;
-            gp.bomdC.bombs.get(i).solidArea.y = gp.bomdC.bombs.get(i).solidArea.y
-                    + gp.bomdC.bombs.get(i).y;
+            gp.bombM.bombs.get(i).solidArea.x = gp.bombM.bombs.get(i).solidArea.x
+                    + gp.bombM.bombs.get(i).x;
+            gp.bombM.bombs.get(i).solidArea.y = gp.bombM.bombs.get(i).solidArea.y
+                    + gp.bombM.bombs.get(i).y;
 
             switch (entity.direction) {
                 case "up":
                     entity.solidArea.y -= entity.speed;
-                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
-                        if (gp.bomdC.bombs.get(i).newBomb) {
+                    if (entity.solidArea.intersects(gp.bombM.bombs.get(i).solidArea)) {
+                        if (gp.bombM.bombs.get(i).newBomb) {
                             entity.collisionOn = false;
                         } else {
                             entity.collisionOn = true;
                         }
                     } else {
-                        gp.bomdC.bombs.get(i).newBomb = false;
+                        gp.bombM.bombs.get(i).newBomb = false;
                     }
                     break;
                 case "down":
                     entity.solidArea.y += entity.speed;
-                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
-                        if (gp.bomdC.bombs.get(i).newBomb) {
+                    if (entity.solidArea.intersects(gp.bombM.bombs.get(i).solidArea)) {
+                        if (gp.bombM.bombs.get(i).newBomb) {
                             entity.collisionOn = false;
                         } else {
                             entity.collisionOn = true;
                         }
                     } else {
-                        gp.bomdC.bombs.get(i).newBomb = false;
+                        gp.bombM.bombs.get(i).newBomb = false;
                     }
                     break;
                 case "left":
                     entity.solidArea.x -= entity.speed;
-                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
-                        if (gp.bomdC.bombs.get(i).newBomb) {
+                    if (entity.solidArea.intersects(gp.bombM.bombs.get(i).solidArea)) {
+                        if (gp.bombM.bombs.get(i).newBomb) {
                             entity.collisionOn = false;
                         } else {
                             entity.collisionOn = true;
                         }
                     } else {
-                        gp.bomdC.bombs.get(i).newBomb = false;
+                        gp.bombM.bombs.get(i).newBomb = false;
                     }
                     break;
                 case "right":
                     entity.solidArea.x += entity.speed;
-                    if (entity.solidArea.intersects(gp.bomdC.bombs.get(i).solidArea)) {
-                        if (gp.bomdC.bombs.get(i).newBomb) {
+                    if (entity.solidArea.intersects(gp.bombM.bombs.get(i).solidArea)) {
+                        if (gp.bombM.bombs.get(i).newBomb) {
                             entity.collisionOn = false;
                         } else {
                             entity.collisionOn = true;
                         }
 
                     } else {
-                        gp.bomdC.bombs.get(i).newBomb = false;
+                        gp.bombM.bombs.get(i).newBomb = false;
                     }
                     break;
             }
             entity.solidArea.x = entity.solidAreaDefaulX;
             entity.solidArea.y = entity.solidAreaDefaulY;
-            gp.bomdC.bombs.get(i).solidArea.x = gp.bomdC.bombs.get(i).solidAreaDefaulX;
-            gp.bomdC.bombs.get(i).solidArea.y = gp.bomdC.bombs.get(i).solidAreaDefaulY;
+            gp.bombM.bombs.get(i).solidArea.x = gp.bombM.bombs.get(i).solidAreaDefaulX;
+            gp.bombM.bombs.get(i).solidArea.y = gp.bombM.bombs.get(i).solidAreaDefaulY;
         }
     }
 
@@ -349,11 +349,11 @@ public class CollisionChecker {
         int colBottomRightPlayer = colTopLeftPlayer + 1;
         int rowBottomRightPlayer = rowTopLeftPlayer + 1;
 
-        for (int i = 0; i < gp.bomdC.flames.size(); i++) {
+        for (int i = 0; i < gp.bombM.flames.size(); i++) {
 
-            for (int j = 1; j <= gp.bomdC.flames.get(i).check[0]; j++) {
-                int rowUpFlame = (gp.bomdC.flames.get(i).flameY - j * gp.tileSize) / gp.tileSize;
-                int colUpFlame = gp.bomdC.flames.get(i).flameX / gp.tileSize;
+            for (int j = 1; j <= gp.bombM.flames.get(i).check[0]; j++) {
+                int rowUpFlame = (gp.bombM.flames.get(i).flameY - j * gp.tileSize) / gp.tileSize;
+                int colUpFlame = gp.bombM.flames.get(i).flameX / gp.tileSize;
 
                 if (colTopLeftPlayer == colUpFlame && rowTopLeftPlayer == rowUpFlame) {
                     return true;
@@ -369,9 +369,9 @@ public class CollisionChecker {
                 }
             }
 
-            for (int j = 1; j <= gp.bomdC.flames.get(i).check[1]; j++) {
-                int rowRightFlame = gp.bomdC.flames.get(i).flameY / gp.tileSize;
-                int colRightFlame = (gp.bomdC.flames.get(i).flameX + j * gp.tileSize) / gp.tileSize;
+            for (int j = 1; j <= gp.bombM.flames.get(i).check[1]; j++) {
+                int rowRightFlame = gp.bombM.flames.get(i).flameY / gp.tileSize;
+                int colRightFlame = (gp.bombM.flames.get(i).flameX + j * gp.tileSize) / gp.tileSize;
 
                 if (colTopLeftPlayer == colRightFlame && rowTopLeftPlayer == rowRightFlame) {
                     return true;
@@ -387,9 +387,9 @@ public class CollisionChecker {
                 }
             }
 
-            for (int j = 1; j <= gp.bomdC.flames.get(i).check[2]; j++) {
-                int rowDownFlame = (gp.bomdC.flames.get(i).flameY + j * gp.tileSize) / gp.tileSize;
-                int colDownFlame = gp.bomdC.flames.get(i).flameX / gp.tileSize;
+            for (int j = 1; j <= gp.bombM.flames.get(i).check[2]; j++) {
+                int rowDownFlame = (gp.bombM.flames.get(i).flameY + j * gp.tileSize) / gp.tileSize;
+                int colDownFlame = gp.bombM.flames.get(i).flameX / gp.tileSize;
 
                 if (colTopLeftPlayer == colDownFlame && rowTopLeftPlayer == rowDownFlame) {
                     return true;
@@ -405,9 +405,9 @@ public class CollisionChecker {
                 }
             }
 
-            for (int j = 1; j <= gp.bomdC.flames.get(i).check[3]; j++) {
-                int rowLeftFlame = gp.bomdC.flames.get(i).flameY / gp.tileSize;
-                int colLeftFlame = (gp.bomdC.flames.get(i).flameX - j * gp.tileSize) / gp.tileSize;
+            for (int j = 1; j <= gp.bombM.flames.get(i).check[3]; j++) {
+                int rowLeftFlame = gp.bombM.flames.get(i).flameY / gp.tileSize;
+                int colLeftFlame = (gp.bombM.flames.get(i).flameX - j * gp.tileSize) / gp.tileSize;
 
                 if (colTopLeftPlayer == colLeftFlame && rowTopLeftPlayer == rowLeftFlame) {
                     return true;

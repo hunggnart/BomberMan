@@ -19,11 +19,11 @@ public class Bomb extends Entity {
     public Bomb(GamePanel gp) {
         this.gp = gp;
         getBombImage();
-        setDefaulValueBomb();
+        setDefaultValueBomb();
         newBomb = true;
     }
 
-    public void setDefaulValueBomb() {
+    public void setDefaultValueBomb() {
         solidArea = new Rectangle(1, 1, 15 * gp.scale, 15 * gp.scale);
         solidAreaDefaulX = solidArea.x;
         solidAreaDefaulY = solidArea.y;

@@ -5,19 +5,18 @@ import Entity.Enemy;
 import Entity.Oneal;
 import main.GamePanel;
 
-import javax.jws.Oneway;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnemyContronler {
+public class EnemyManager {
     GamePanel gp;
 
-    public List<Enemy> enemies = new ArrayList<Enemy>();
+    public List<Enemy> enemies;
 
     int enemiesTotal;
 
-    public EnemyContronler(GamePanel gp) {
+    public EnemyManager(GamePanel gp) {
         this.gp = gp;
         enemies = new ArrayList<Enemy>();
         enemiesTotal = 0;

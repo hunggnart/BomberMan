@@ -111,7 +111,8 @@ public class Player extends Entity {
         }
         //place bomb
         if (keyH.spacePress) {
-            gp.bomdC.bombInit(this.x, this.y);
+            gp.bombM.bombInit(this.x, this.y);
+            gp.playSe(1);
             keyH.spacePress = false;
         }
 
