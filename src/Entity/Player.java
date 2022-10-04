@@ -15,8 +15,7 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
     public BufferedImage up, up1, up2, down, down1, down2, left, left1, left2, right, right1, right2;
-    List<Bomb> bombs = new ArrayList<>();
-    boolean placeBombTurn = false;
+    public boolean isDead = false;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -56,6 +55,8 @@ public class Player extends Entity {
     }
 
     public void update() {
+        isDead = gp.cChecker.checkEntityVsFlame(this);
+        gp.cChecker.checkEnemy(this, true);
         if (keyH.leftPress || keyH.rightPress || keyH.upPress || keyH.downPress) {
             if (keyH.upPress) {
                 direction = "up";
@@ -72,7 +73,6 @@ public class Player extends Entity {
             gp.cChecker.CheckPlayerVsItem(this);
             gp.cChecker.checkPlayerVsBomb(this);
             gp.cChecker.checkTile(this);
-            gp.cChecker.checkEnemy(this, true);
 
             //If collisionOn is false
 

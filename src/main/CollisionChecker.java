@@ -356,7 +356,7 @@ public class CollisionChecker {
         return rs;
     }
 
-    public Boolean checkEnemyVsFlame(Enemy enemy) {
+    public Boolean checkEntityVsFlame(Entity enemy) {
 
         int colTopLeftPlayer = enemy.x / gp.tileSize;
         int rowTopLeftPlayer = enemy.y / gp.tileSize;

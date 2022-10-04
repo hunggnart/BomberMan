@@ -41,7 +41,7 @@ public class Balloom extends Enemy {
 
     public void update() {
         //Check Flame
-        isDead = gp.cChecker.checkEnemyVsFlame(this);
+        isDead = gp.cChecker.checkEntityVsFlame(this);
         if (isDead) {
             gp.explode.endInit(this.x, this.y);
         }

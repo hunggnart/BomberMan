@@ -56,6 +56,7 @@ public class Bomb extends Entity {
     }
 
     public void update() {
+        exploded = gp.cChecker.checkEntityVsFlame(this);
         frameBomb++;
         if (frameBomb > 50) {
             countToExplode++;

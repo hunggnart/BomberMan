@@ -39,7 +39,7 @@ public class Oneal extends Enemy {
 
     public void update() {
         //Check dead
-        isDead = gp.cChecker.checkEnemyVsFlame(this);
+        isDead = gp.cChecker.checkEntityVsFlame(this);
         if (isDead) {
             gp.explode.endInit(this.x, this.y);
         }
