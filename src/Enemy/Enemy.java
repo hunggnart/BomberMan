@@ -1,5 +1,6 @@
-package Entity;
+package Enemy;
 
+import Entity.Entity;
 import main.GamePanel;
 
 import javax.imageio.ImageIO;

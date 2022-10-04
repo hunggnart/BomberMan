@@ -12,40 +12,29 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
-    public final int scale = 2;
+    public final int scale = 3;
     public final int menuState = 0;
     public final int playState = 1;
     public final int endState = 2;
     public final int pauseState = 3;
     public  int gameState = menuState;
-
+    public final int winPortal = 9;
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 31;
     public final int maxScreenRow = 13;
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
-
     final int FPS = 60;
     KeyHandler keyH = new KeyHandler(this);
-
     Player player = new Player(this, keyH);
-
     public BombManager bombM = new BombManager(this);
-
     public EnemyManager enemyM = new EnemyManager(this);
-
     TileManager tileM = new TileManager(this);
-
     Thread gameThread;
-
     Sound se = new Sound();
-
     Sound music = new Sound();
-
     UI ui=new UI(this);
-
     ItemManager itemC = new ItemManager(this);
-
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Explode explode = new Explode(this);
 
@@ -94,7 +83,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-
         if(gameState==playState) {
             enemyM.enemiesUpdate();
             player.update();
@@ -102,21 +90,18 @@ public class GamePanel extends JPanel implements Runnable {
             bombM.updateFlames();
             explode.updateBreaks();
             explode.updateEnd();
+            itemC.updateItems();
         }
-
     }
 
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D) g;
-
         if(gameState==playState) {
             ui.drawPlay(g2);
         }
         ui.draw(gameState,g2);
-
         g2.dispose();
     }
 

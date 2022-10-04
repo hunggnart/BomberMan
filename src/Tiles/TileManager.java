@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class TileManager {
     GamePanel gp;
     public Tile[] tile;
-
+    public Portal portal;
     public int mapTileNum[][];
 
     public TileManager(GamePanel gp) {
@@ -39,7 +39,10 @@ public class TileManager {
                             mapTileNum[i][j] = 0;
                             break;
                         case "x":
-                            mapTileNum[i][j] = 2;
+                            mapTileNum[i][j] = 9;
+                            portal = new Portal(gp);
+                            portal.x = j * gp.tileSize;
+                            portal.y = i * gp.tileSize;
                             break;
                         case " ":
                             mapTileNum[i][j] = 1;
@@ -70,12 +73,13 @@ public class TileManager {
             tile[1] = new Tile();
             tile[1].img = ImageIO.read(getClass().getResourceAsStream("/tile/grass.png"));
             tile[1].conclusion = false;
-            tile[2] = new Tile();
-            tile[2].img = ImageIO.read(getClass().getResourceAsStream("/tile/portal.png"));
-            tile[2].conclusion = false;
             tile[3] = new Tile();
             tile[3].img = ImageIO.read(getClass().getResourceAsStream("/tile/wall.png"));
             tile[3].conclusion = true;
+            tile[9] = new Tile();
+            tile[9].img = ImageIO.read(getClass().getResourceAsStream("/tile/brick.png"));
+            tile[9].conclusion = true;
+            tile[9].canBreak = true;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,5 +106,7 @@ public class TileManager {
                 y += gp.tileSize;
             }
         }
+
+        portal.draw(g2);
     }
 }

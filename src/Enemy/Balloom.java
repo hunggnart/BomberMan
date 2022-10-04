@@ -1,10 +1,8 @@
-package Entity;
+package Enemy;
 
 import main.GamePanel;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Balloom extends Enemy {

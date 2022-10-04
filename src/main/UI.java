@@ -7,7 +7,6 @@ public class UI {
     GamePanel gp;
     Font arial;
     public int optionNum =0;
-
     public UI(GamePanel gp) {
         this.gp = gp;
         arial = new Font("Arial", Font.BOLD, 40);
@@ -76,10 +75,10 @@ public class UI {
     }
 
     public void drawPlay(Graphics2D g2) {
-
         gp.tileM.draw(g2);
         gp.bombM.drawBombs(g2);
         gp.bombM.drawFlames(g2);
+        gp.itemC.drawItem(g2);
         gp.player.draw(g2);
         gp.enemyM.enemysRender(g2);
         gp.explode.drawBreaks(g2);

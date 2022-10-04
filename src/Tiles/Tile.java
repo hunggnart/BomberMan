@@ -1,8 +1,10 @@
 package Tiles;
 
+import Entity.Entity;
+
 import java.awt.image.BufferedImage;
 
-public class Tile {
+public class Tile extends Entity {
     public BufferedImage img;
     public boolean conclusion = false;
 

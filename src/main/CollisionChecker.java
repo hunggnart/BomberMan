@@ -3,7 +3,7 @@ package main;
 import Bomb.Flame;
 import Entity.Entity;
 import Entity.Player;
-import Entity.Enemy;
+import Enemy.Enemy;
 import Item.ItemBomb;
 import Item.ItemFlame;
 import Item.ItemSpeed;
@@ -295,6 +295,9 @@ public class CollisionChecker {
                 if (rs[0] == 99) {
                     rs[0] = i - 1;
                     if (gp.tileM.tile[tileNumUp].canBreak) {
+                        if (tileNumUp == gp.winPortal) {
+                            gp.tileM.portal.open();
+                        }
                         gp.explode.breakInit(colUpFlame * gp.tileSize, rowUpFlame * gp.tileSize);
                         gp.itemC.initItems(colUpFlame * gp.tileSize, rowUpFlame * gp.tileSize);
                         gp.tileM.mapTileNum[rowUpFlame][colUpFlame] = 1;
@@ -306,6 +309,9 @@ public class CollisionChecker {
                 if (rs[1] == 99) {
                     rs[1] = i - 1;
                     if (gp.tileM.tile[tileNumRight].canBreak) {
+                        if (tileNumRight == gp.winPortal) {
+                            gp.tileM.portal.open();
+                        }
                         gp.explode.breakInit(colRightFlame * gp.tileSize, rowRightFlame * gp.tileSize);
                         gp.itemC.initItems(colRightFlame * gp.tileSize, rowRightFlame * gp.tileSize);
                         gp.tileM.mapTileNum[rowRightFlame][colRightFlame] = 1;
@@ -317,6 +323,9 @@ public class CollisionChecker {
                 if (rs[2] == 99) {
                     rs[2] = i - 1;
                     if (gp.tileM.tile[tileNumDown].canBreak) {
+                        if (tileNumDown == gp.winPortal) {
+                            gp.tileM.portal.open();
+                        }
                         gp.explode.breakInit(colDownFlame * gp.tileSize, rowDownFlame * gp.tileSize);
                         gp.itemC.initItems(colDownFlame * gp.tileSize, rowDownFlame * gp.tileSize);
                         gp.tileM.mapTileNum[rowDownFlame][colDownFlame] = 1;
@@ -328,6 +337,9 @@ public class CollisionChecker {
                 if (rs[3] == 99) {
                     rs[3] = i - 1;
                     if (gp.tileM.tile[tileNumLeft].canBreak) {
+                        if (tileNumLeft == gp.winPortal) {
+                            gp.tileM.portal.open();
+                        }
                         gp.explode.breakInit(colLeftFlame * gp.tileSize, rowLeftFlame * gp.tileSize);
                         gp.tileM.mapTileNum[rowLeftFlame][colLeftFlame] = 1;
                     }

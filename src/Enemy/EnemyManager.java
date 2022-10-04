@@ -1,8 +1,5 @@
 package Enemy;
 
-import Entity.Balloom;
-import Entity.Enemy;
-import Entity.Oneal;
 import main.GamePanel;
 
 import java.awt.*;
