@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
-    public final int scale = 3;
+    public final int scale = 2;
     public final int menuState = 0;
     public final int playState = 1;
     public final int endState = 2;
@@ -98,9 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        if(gameState==playState) {
-            ui.drawPlay(g2);
-        }
+
         ui.draw(gameState,g2);
         g2.dispose();
     }

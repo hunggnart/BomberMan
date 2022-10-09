@@ -8,7 +8,7 @@ public class KeyHandler implements KeyListener {
     GamePanel gp;
 
     public KeyHandler(GamePanel gp) {
-        this.gp=gp;
+        this.gp = gp;
     }
 
     @Override
@@ -20,30 +20,93 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        if (code == KeyEvent.VK_UP) {
-            if(gp.ui.optionNum>=0) {
-                gp.ui.optionNum--;
-            }if(gp.ui.optionNum==-1) {
-                gp.ui.optionNum=2;
+        if (gp.gameState == gp.playState) {
+            if (code == KeyEvent.VK_ESCAPE) {
+                gp.gameState = gp.pauseState;
             }
+        }
+        if (code == KeyEvent.VK_UP) {
+            if (gp.gameState == gp.menuState) {
+                if (gp.ui.menuNum >= 0) {
+                    gp.ui.menuNum--;
+                    if (gp.ui.menuNum == -1) {
+                        gp.ui.menuNum = 2;
+                    }
+                }
+            }
+            if (gp.gameState == gp.pauseState) {
+                if (gp.ui.pauseNum >= 0) {
+                    gp.ui.pauseNum--;
+                    if (gp.ui.pauseNum == -1) {
+                        gp.ui.pauseNum = 1;
+                    }
+                }
+            }
+            if (gp.gameState == gp.endState) {
+                if (gp.ui.overNum >= 0) {
+                    gp.ui.overNum--;
+                    if (gp.ui.overNum == -1) {
+                        gp.ui.overNum = 1;
+                    }
+                }
+            }
+
         }
         if (code == KeyEvent.VK_DOWN) {
-            if(gp.ui.optionNum<=2) {
-                gp.ui.optionNum++;
+            if (gp.ui.pauseNum < 2) {
+                gp.ui.pauseNum++;
+                if (gp.ui.pauseNum == 2) {
+                    gp.ui.pauseNum = 0;
+                }
             }
-            if(gp.ui.optionNum==3) {
-            gp.ui.optionNum=0;
+            if (gp.ui.menuNum <= 2) {
+                gp.ui.menuNum++;
+                if (gp.ui.menuNum == 3) {
+                    gp.ui.menuNum = 0;
+                }
+            }
+            if(gp.gameState==gp.endState) {
+                if(gp.ui.overNum<2) {
+                    gp.ui.overNum++;
+                    if(gp.ui.overNum==2) {
+                        gp.ui.overNum=0;
+                    }
+                }
+            }
         }
-        }
-        if (code == KeyEvent.VK_ENTER){
-            switch (gp.ui.optionNum) {
-                case 0:
-                    gp.changeGameState(gp.playState);
-                    gp.playMusic(0);
-                case 1:
-                    //
-                case 2:
-                    //
+        if (code == KeyEvent.VK_ENTER) {
+            if (gp.gameState == gp.menuState) {
+                switch (gp.ui.menuNum) {
+                    case 0:
+                        gp.changeGameState(gp.playState);
+                        gp.playMusic(0);
+                        break;
+                    case 1:
+                        //draw option
+                    case 2:
+                        System.exit(0);
+                        break;
+                }
+            }
+            if (gp.gameState == gp.pauseState) {
+                switch (gp.ui.pauseNum) {
+                    case 0:
+                        gp.changeGameState(gp.playState);
+                        break;
+                    case 1:
+                        System.exit(0);
+                        break;
+                }
+            }
+            if (gp.gameState == gp.endState) {
+                switch (gp.ui.overNum) {
+                    case 0:
+                        gp.changeGameState(gp.menuState);
+                        break;
+                    case 1:
+                        System.exit(0);
+                        break;
+                }
             }
         }
 

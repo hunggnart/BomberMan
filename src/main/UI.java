@@ -1,12 +1,21 @@
 package main;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import javax.xml.soap.Text;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class UI {
     GamePanel gp;
     Font arial;
-    public int optionNum =0;
+    public int menuNum = 0;
+    public int pauseNum = 0;
+    public int overNum = 0;
+
+
     public UI(GamePanel gp) {
         this.gp = gp;
         arial = new Font("Arial", Font.BOLD, 40);
@@ -26,53 +35,54 @@ public class UI {
                 drawEnd(g2);
                 break;
             case 3:
+                drawPlay(g2);
                 drawPause(g2);
                 break;
         }
     }
 
     public void drawMenu(Graphics2D g2) {
-        //Title
-        String text = "BomberMan";
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
-        int x = getCenterX(text,g2);
-        int y = gp.screenHeight / 4;
-        //Shadow
-        g2.setColor(Color.gray);
-        g2.drawString(text,x+4,y+4);
-        //Color
-        g2.setColor(Color.white);
-        g2.drawString(text, x, y);
-        //Menu Option
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
-        x=gp.screenWidth/2;
-        y=gp.screenHeight/2;
-        //NewGame
-        text="New Game";
-        x= getCenterX(text,g2);
-        y+=2*gp.tileSize;
-        if(optionNum==0) {
-            g2.drawString(">",x-gp.tileSize,y);
+        BufferedImage image = null;
+        BufferedImage icon = null;
+        try {
+            image = ImageIO.read(getClass().getResourceAsStream("/ui/back2.png"));
+            icon = ImageIO.read(getClass().getResourceAsStream("/ui/tri1.png"));
+        } catch (IOException i) {
+            i.printStackTrace();
         }
-        g2.drawString(text,x,y);
+        g2.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight, null);
+
+        String text;
+        int x, y;
+        g2.setColor(Color.black);
+        //Menu Option
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, gp.tileSize));
+        x = 4 * gp.tileSize;
+        y = gp.screenHeight / 2 + 20;
+        //NewGame
+        text = "New Game";
+        g2.drawString(text, x, y);
+        if (menuNum == 0) {
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize / 2-3, gp.tileSize / 2, gp.tileSize / 2, null);
+        }
         //Option
         text = "Option";
-        x= getCenterX(text,g2);
-        y+=2*gp.tileSize;
-        if(optionNum==1) {
-            g2.drawString(">",x-gp.tileSize,y);
+        y += 2 * gp.tileSize;
+        g2.drawString(text, x, y);
+        if (menuNum == 1) {
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize/2-3, gp.tileSize / 2, gp.tileSize / 2, null);
         }
-        g2.drawString(text,x,y);
+
         //Exit
         text = "Exit";
-        x= getCenterX(text,g2);
-        y+=2*gp.tileSize;
-        if(optionNum==2) {
-            g2.drawString(">",x-gp.tileSize,y);
+        y += 2 * gp.tileSize;
+        g2.drawString(text, x, y);
+        if (menuNum == 2) {
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize/2-3, gp.tileSize / 2, gp.tileSize / 2, null);
         }
-        g2.drawString(text,x,y);
 
     }
+
 
     public void drawPlay(Graphics2D g2) {
         gp.tileM.draw(g2);
@@ -86,16 +96,93 @@ public class UI {
     }
 
     public void drawPause(Graphics2D g2) {
+        //Resume
+        String text;
+        int x, y;
+        BufferedImage image = null;
+        BufferedImage icon = null;
+
+        try {
+            image = ImageIO.read(getClass().getResourceAsStream("/ui/pause2.png"));
+            icon = ImageIO.read(getClass().getResourceAsStream("/ui/tri1.png"));
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+
+        x = gp.screenWidth / 2;
+        y = gp.screenHeight / 2;
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
+
+        g2.drawImage(image, -20, 0, gp.screenWidth, gp.screenHeight, null);
+        text = "Pause";
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+        g2.setColor(Color.black);
+        g2.drawString(text, getXCenter(text, g2), 90);
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
+        //Resume
+        text = "Resume";
+        x = getXCenter(text, g2);
+        y += gp.tileSize;
+        if (pauseNum == 0) {
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize, gp.tileSize, gp.tileSize, null);
+        }
+        g2.drawString(text, x, y);
+
+        //Exit
+        text = "Exit";
+        x = getXCenter(text, g2);
+        y += 2 * gp.tileSize;
+        if (pauseNum == 1) {
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize, gp.tileSize, gp.tileSize, null);
+        }
+        g2.drawString(text, x, y);
 
     }
 
     public void drawEnd(Graphics2D g2) {
+        String text=null;
+        int x,y;
+        BufferedImage image = null;
+        BufferedImage icon  = null;
 
+        try {
+            image = ImageIO.read(getClass().getResourceAsStream("/ui/over.png"));
+            icon = ImageIO.read(getClass().getResourceAsStream("/ui/tri4.png"));
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+
+        x = gp.screenWidth / 2;
+        y = gp.screenHeight / 2;
+
+        g2.drawImage(image,0,0,gp.screenWidth,gp.screenHeight,null);
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
+        g2.setColor(Color.yellow);
+        //Resume
+        text = "Menu";
+        x = getXCenter(text, g2);
+        y += gp.tileSize;
+        if (pauseNum == 0) {
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize+10, gp.tileSize/2, gp.tileSize/2, null);
+        }
+        g2.drawString(text, x, y);
+
+        //Exit
+        text = "Exit";
+        x = getXCenter(text, g2);
+        y += 2 * gp.tileSize;
+        if (pauseNum == 1) {
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize+10, gp.tileSize/2, gp.tileSize/2, null);
+        }
+        g2.drawString(text, x, y);
+        
     }
 
-    public int getCenterX(String text, Graphics2D g2) {
-        int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        return gp.screenWidth/2-length/2;
+    public int getXCenter(String text, Graphics2D g2) {
+        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        return gp.screenWidth / 2 - length / 2;
     }
 
 }

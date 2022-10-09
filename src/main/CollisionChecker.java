@@ -91,6 +91,7 @@ public class CollisionChecker {
                     entity.solidArea.y -= entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
+                        gp.gameState= gp.endState;
                         System.out.println("Game over!");
                     }
                     break;
@@ -98,6 +99,7 @@ public class CollisionChecker {
                     entity.solidArea.y += entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
+                        gp.gameState= gp.endState;
                         System.out.println("Game over!");
                     }
                     break;
@@ -105,6 +107,7 @@ public class CollisionChecker {
                     entity.solidArea.x -= entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
+                        gp.gameState= gp.endState;
                         System.out.println("Game over!");
                     }
                     break;
@@ -112,6 +115,7 @@ public class CollisionChecker {
                     entity.solidArea.x += entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
+                        gp.gameState= gp.endState;
                         System.out.println("Game over!");
                     }
                     break;

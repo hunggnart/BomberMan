@@ -8,8 +8,8 @@ import java.util.List;
 
 public class BombManager {
     GamePanel gp;
-    public List<Bomb> bombs = new ArrayList<Bomb>();
-    public List<Flame> flames = new ArrayList<Flame>();
+    public List<Bomb> bombs ;
+    public List<Flame> flames;
     public int maxBombs = 5;
     public int flameLong = 1;
 
@@ -18,8 +18,8 @@ public class BombManager {
 
     public BombManager(GamePanel gp) {
         this.gp = gp;
-        bombs = new ArrayList<Bomb>();
-        flames = new ArrayList<Flame>();
+        bombs = new ArrayList<>();
+        flames = new ArrayList<>();
     }
 
     public void bombInit(int x, int y) {
@@ -72,6 +72,7 @@ public class BombManager {
                 if (TotalBomb == 0) {
                     return;
                 }
+                continue;
             }
             bombs.get(i).update();
         }

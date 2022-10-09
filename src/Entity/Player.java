@@ -1,6 +1,5 @@
 package Entity;
 
-import Bomb.Bomb;
 import main.GamePanel;
 import main.KeyHandler;
 
@@ -8,8 +7,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Player extends Entity {
     GamePanel gp;
