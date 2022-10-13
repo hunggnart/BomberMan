@@ -91,7 +91,7 @@ public class CollisionChecker {
                     entity.solidArea.y -= entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
-                        gp.gameState= gp.endState;
+                        gp.player.isDead=true;
                         System.out.println("Game over!");
                     }
                     break;
@@ -99,7 +99,7 @@ public class CollisionChecker {
                     entity.solidArea.y += entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
-                        gp.gameState= gp.endState;
+                        gp.player.isDead=true;
                         System.out.println("Game over!");
                     }
                     break;
@@ -107,7 +107,7 @@ public class CollisionChecker {
                     entity.solidArea.x -= entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
-                        gp.gameState= gp.endState;
+                        gp.player.isDead=true;
                         System.out.println("Game over!");
                     }
                     break;
@@ -115,7 +115,7 @@ public class CollisionChecker {
                     entity.solidArea.x += entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
-                        gp.gameState= gp.endState;
+                        gp.player.isDead=true;
                         System.out.println("Game over!");
                     }
                     break;
@@ -466,6 +466,7 @@ public class CollisionChecker {
                 case "up":
                     entity.solidArea.y -= entity.speed;
                     if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
+                        gp.playSe(3);
                         if (gp.itemC.items.get(i) instanceof ItemBomb) {
                             gp.bombM.maxBombs++;
                             gp.itemC.items.get(i).update();
@@ -483,6 +484,7 @@ public class CollisionChecker {
                 case "down":
                     entity.solidArea.y += entity.speed;
                     if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
+                        gp.playSe(3);
                         if (gp.itemC.items.get(i) instanceof ItemBomb) {
                             gp.bombM.maxBombs++;
                             gp.itemC.items.get(i).update();
@@ -500,6 +502,7 @@ public class CollisionChecker {
                 case "left":
                     entity.solidArea.x -= entity.speed;
                     if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
+                        gp.playSe(3);
                         if (gp.itemC.items.get(i) instanceof ItemBomb) {
                             gp.bombM.maxBombs++;
                             gp.itemC.items.get(i).update();
@@ -517,6 +520,7 @@ public class CollisionChecker {
                 case "right":
                     entity.solidArea.x += entity.speed;
                     if (entity.solidArea.intersects(gp.itemC.items.get(i).solidArea)) {
+                        gp.playSe(3);
                         if (gp.itemC.items.get(i) instanceof ItemBomb) {
                             gp.bombM.maxBombs++;
                             gp.itemC.items.get(i).update();

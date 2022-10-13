@@ -21,6 +21,12 @@ public class UI {
         arial = new Font("Arial", Font.BOLD, 40);
     }
 
+    public void reset() {
+        menuNum=0;
+        pauseNum=0;
+        overNum=0;
+    }
+
 
     public void draw(int gameState, Graphics2D g2) {
         switch (gameState) {
@@ -130,7 +136,7 @@ public class UI {
         g2.drawString(text, x, y);
 
         //Exit
-        text = "Exit";
+        text = "Menu";
         x = getXCenter(text, g2);
         y += 2 * gp.tileSize;
         if (pauseNum == 1) {
@@ -164,7 +170,7 @@ public class UI {
         text = "Menu";
         x = getXCenter(text, g2);
         y += gp.tileSize;
-        if (pauseNum == 0) {
+        if (overNum == 0) {
             g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize+10, gp.tileSize/2, gp.tileSize/2, null);
         }
         g2.drawString(text, x, y);
@@ -173,7 +179,7 @@ public class UI {
         text = "Exit";
         x = getXCenter(text, g2);
         y += 2 * gp.tileSize;
-        if (pauseNum == 1) {
+        if (overNum == 1) {
             g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize+10, gp.tileSize/2, gp.tileSize/2, null);
         }
         g2.drawString(text, x, y);

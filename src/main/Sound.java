@@ -17,6 +17,7 @@ public class Sound {
         soundURL[4]=getClass().getResource("/sound/endgame3.wav") ;
         soundURL[5]=getClass().getResource("/sound/bomb_explode.wav");
     }
+
     public void setFile(int i) {
         try{
             AudioInputStream aInput= AudioSystem.getAudioInputStream(soundURL[i]);

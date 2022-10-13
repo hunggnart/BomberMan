@@ -15,7 +15,7 @@ public class EnemyManager {
 
     public EnemyManager(GamePanel gp) {
         this.gp = gp;
-        enemies = new ArrayList<Enemy>();
+        enemies = new ArrayList<>();
         enemiesTotal = 0;
     }
 

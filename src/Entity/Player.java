@@ -17,11 +17,11 @@ public class Player extends Entity {
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
-        setDefaulValues();
+        setDefaultValues();
         getPlayerImage();
     }
 
-    public void setDefaulValues() {
+    public void setDefaultValues() {
         solidArea = new Rectangle(5 * gp.scale, 7 * gp.scale, 6 * gp.scale, 7 * gp.scale);
         solidAreaDefaulX = solidArea.x;
         solidAreaDefaulY = solidArea.y;

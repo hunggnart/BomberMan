@@ -43,7 +43,7 @@ public class KeyHandler implements KeyListener {
                 }
             }
             if (gp.gameState == gp.endState) {
-                if (gp.ui.overNum >= 0) {
+                if (gp.ui.overNum > -1) {
                     gp.ui.overNum--;
                     if (gp.ui.overNum == -1) {
                         gp.ui.overNum = 1;
@@ -78,6 +78,7 @@ public class KeyHandler implements KeyListener {
             if (gp.gameState == gp.menuState) {
                 switch (gp.ui.menuNum) {
                     case 0:
+                        gp.InitGame();
                         gp.changeGameState(gp.playState);
                         gp.playMusic(0);
                         break;
@@ -94,7 +95,8 @@ public class KeyHandler implements KeyListener {
                         gp.changeGameState(gp.playState);
                         break;
                     case 1:
-                        System.exit(0);
+                        gp.changeGameState(gp.menuState);
+                        gp.stopMusic();
                         break;
                 }
             }
@@ -102,6 +104,7 @@ public class KeyHandler implements KeyListener {
                 switch (gp.ui.overNum) {
                     case 0:
                         gp.changeGameState(gp.menuState);
+                        gp.stopMusic();
                         break;
                     case 1:
                         System.exit(0);
