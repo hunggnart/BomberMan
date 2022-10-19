@@ -13,7 +13,6 @@ public class CollisionChecker {
     public GamePanel gp;
 
     public CollisionChecker(GamePanel gp) {
-
         this.gp = gp;
     }
 
@@ -92,7 +91,6 @@ public class CollisionChecker {
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
                         gp.player.isDead=true;
-                        System.out.println("Game over!");
                     }
                     break;
                 case "down":
@@ -100,7 +98,6 @@ public class CollisionChecker {
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
                         gp.player.isDead=true;
-                        System.out.println("Game over!");
                     }
                     break;
                 case "left":
@@ -108,7 +105,6 @@ public class CollisionChecker {
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
                         gp.player.isDead=true;
-                        System.out.println("Game over!");
                     }
                     break;
                 case "right":
@@ -116,7 +112,6 @@ public class CollisionChecker {
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
                         gp.player.isDead=true;
-                        System.out.println("Game over!");
                     }
                     break;
             }

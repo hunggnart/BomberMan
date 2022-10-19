@@ -32,8 +32,6 @@ public class Balloom extends Enemy {
             down = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left1.png"));
             down1 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left1.png"));
             down2 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left1.png"));
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }

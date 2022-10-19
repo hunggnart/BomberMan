@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
-    public final int scale = 2;
+    public final int scale = 3;
     public final int menuState = 0;
     public final int playState = 1;
     public final int endState = 2;
@@ -27,7 +27,6 @@ public class GamePanel extends JPanel implements Runnable {
     final int FPS = 60;
     UI ui = new UI(this);
     KeyHandler keyH = new KeyHandler(this);
-    ;
 
     Player player;
     public BombManager bombM;
@@ -104,7 +103,7 @@ public class GamePanel extends JPanel implements Runnable {
             explode.updateBreaks();
             explode.updateEnd();
             itemC.updateItems();
-            if (player.isDead) {
+            if (player.deadEnd) {
                 changeGameState(endState);
                 player.isDead = false;
             }
