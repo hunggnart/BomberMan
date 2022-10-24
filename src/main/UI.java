@@ -22,9 +22,9 @@ public class UI {
     }
 
     public void reset() {
-        menuNum=0;
-        pauseNum=0;
-        overNum=0;
+        menuNum = 0;
+        pauseNum = 0;
+        overNum = 0;
     }
 
 
@@ -69,14 +69,14 @@ public class UI {
         text = "New Game";
         g2.drawString(text, x, y);
         if (menuNum == 0) {
-            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize / 2-3, gp.tileSize / 2, gp.tileSize / 2, null);
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize / 2 - 3, gp.tileSize / 2, gp.tileSize / 2, null);
         }
         //Option
         text = "Option";
         y += 2 * gp.tileSize;
         g2.drawString(text, x, y);
         if (menuNum == 1) {
-            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize/2-3, gp.tileSize / 2, gp.tileSize / 2, null);
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize / 2 - 3, gp.tileSize / 2, gp.tileSize / 2, null);
         }
 
         //Exit
@@ -84,7 +84,7 @@ public class UI {
         y += 2 * gp.tileSize;
         g2.drawString(text, x, y);
         if (menuNum == 2) {
-            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize/2-3, gp.tileSize / 2, gp.tileSize / 2, null);
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize / 2 - 3, gp.tileSize / 2, gp.tileSize / 2, null);
         }
 
     }
@@ -147,10 +147,10 @@ public class UI {
     }
 
     public void drawEnd(Graphics2D g2) {
-        String text=null;
-        int x,y;
+        String text = null;
+        int x, y;
         BufferedImage image = null;
-        BufferedImage icon  = null;
+        BufferedImage icon = null;
 
         try {
             image = ImageIO.read(getClass().getResourceAsStream("/ui/over.png"));
@@ -162,28 +162,41 @@ public class UI {
         x = gp.screenWidth / 2;
         y = gp.screenHeight / 2;
 
-        g2.drawImage(image,0,0,gp.screenWidth,gp.screenHeight,null);
+        g2.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight, null);
 
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
+        y+=20;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
+        text = "Your score:";
+        g2.setColor(Color.red);
+        g2.drawString(text + Integer.toString(gp.info.score), getXCenter(text, g2), y);
+
         g2.setColor(Color.yellow);
-        //Resume
-        text = "Menu";
+        //Replay
+        text = "Replay";
         x = getXCenter(text, g2);
         y += gp.tileSize;
         if (overNum == 0) {
-            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize+10, gp.tileSize/2, gp.tileSize/2, null);
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize + 12, gp.tileSize / 2, gp.tileSize / 2, null);
         }
         g2.drawString(text, x, y);
+        //return meu
+        text = "Menu";
+        x = getXCenter(text, g2);
+        y += gp.tileSize;
+        if (overNum == 1) {
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize + 32, gp.tileSize / 2, gp.tileSize / 2, null);
+        }
+        g2.drawString(text, x, y + 15);
 
         //Exit
         text = "Exit";
         x = getXCenter(text, g2);
         y += 2 * gp.tileSize;
-        if (overNum == 1) {
-            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize+10, gp.tileSize/2, gp.tileSize/2, null);
+        if (overNum == 2) {
+            g2.drawImage(icon, x - gp.tileSize, y - gp.tileSize + 12, gp.tileSize / 2, gp.tileSize / 2, null);
         }
         g2.drawString(text, x, y);
-        
+
     }
 
     public int getXCenter(String text, Graphics2D g2) {

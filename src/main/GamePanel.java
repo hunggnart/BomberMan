@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
-    public final int scale = 3;
+    public final int scale = 2;
     public final int menuState = 0;
     public final int playState = 1;
     public final int endState = 2;
@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
     ItemManager itemC;
     public CollisionChecker cChecker;
     public Explode explode;
+    public Info info;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -57,6 +58,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void InitGame() {
+        info=new Info(this);
         player = new Player(this, keyH);
         bombM = new BombManager(this);
         enemyM = new EnemyManager(this);
@@ -96,6 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         if (gameState == playState) {
+            info.update();
             enemyM.enemiesUpdate();
             player.update();
             bombM.updateBombs();
@@ -105,6 +108,7 @@ public class GamePanel extends JPanel implements Runnable {
             itemC.updateItems();
             if (player.deadEnd) {
                 changeGameState(endState);
+                stopMusic();
                 player.isDead = false;
             }
         }
@@ -116,6 +120,9 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
 
         ui.draw(gameState, g2);
+        if(gameState==playState) {
+            info.draw(g2);
+        }
         g2.dispose();
     }
 
