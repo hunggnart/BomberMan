@@ -39,6 +39,9 @@ public class CollisionChecker {
 
                 if (gp.tileM.tile[tileNum1].conclusion || gp.tileM.tile[tileNum2].conclusion) {
                     entity.collisionOn = true;
+                    if (entity instanceof Player) {
+                        entity.x += entity.speed;
+                    }
                 }
                 break;
             case "down":
@@ -48,6 +51,9 @@ public class CollisionChecker {
 
                 if (gp.tileM.tile[tileNum1].conclusion || gp.tileM.tile[tileNum2].conclusion) {
                     entity.collisionOn = true;
+                    if (entity instanceof Player) {
+                        entity.x++;
+                    }
                 }
                 break;
             case "left":
@@ -57,6 +63,9 @@ public class CollisionChecker {
 
                 if (gp.tileM.tile[tileNum1].conclusion || gp.tileM.tile[tileNum2].conclusion) {
                     entity.collisionOn = true;
+                    if (entity instanceof Player) {
+                        entity.y--;
+                    }
                 }
                 break;
             case "right":
@@ -66,6 +75,9 @@ public class CollisionChecker {
 
                 if (gp.tileM.tile[tileNum1].conclusion || gp.tileM.tile[tileNum2].conclusion) {
                     entity.collisionOn = true;
+                    if (entity instanceof Player) {
+                        entity.y--;
+                    }
                 }
                 break;
         }
@@ -90,28 +102,28 @@ public class CollisionChecker {
                     entity.solidArea.y -= entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
-                        gp.player.isDead=true;
+                        gp.player.isDead = true;
                     }
                     break;
                 case "down":
                     entity.solidArea.y += entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
-                        gp.player.isDead=true;
+                        gp.player.isDead = true;
                     }
                     break;
                 case "left":
                     entity.solidArea.x -= entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
-                        gp.player.isDead=true;
+                        gp.player.isDead = true;
                     }
                     break;
                 case "right":
                     entity.solidArea.x += entity.speed;
                     if (entity.solidArea.intersects(gp.enemyM.enemies.get(i).solidArea)) {
                         entity.collisionOn = true;
-                        gp.player.isDead=true;
+                        gp.player.isDead = true;
                     }
                     break;
             }

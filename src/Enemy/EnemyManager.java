@@ -28,6 +28,15 @@ public class EnemyManager {
             case "2":
                 e = new Oneal(gp);
                 break;
+            case "3":
+                e = new Doll(gp);
+                break;
+            case "4":
+                e = new Kondoria(gp);
+                break;
+            case "5":
+                e = new Minvo(gp);
+                break;
         }
         e.x = j * gp.tileSize;
         e.y = i * gp.tileSize;

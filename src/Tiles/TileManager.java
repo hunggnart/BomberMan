@@ -47,14 +47,17 @@ public class TileManager {
                         case " ":
                             mapTileNum[i][j] = 1;
                             break;
-                        case "1":
-                            gp.enemyM.enemiesInit(i,j,mapTileMark);
+                        default:
+                            gp.enemyM.enemiesInit(i, j, mapTileMark);
                             mapTileNum[i][j] = 1;
-                            break;
-                        case "2":
-                            gp.enemyM.enemiesInit(i,j,mapTileMark);
-                            mapTileNum[i][j] = 1;
-                            break;
+//                        case "1":
+//                            gp.enemyM.enemiesInit(i, j, mapTileMark);
+//                            mapTileNum[i][j] = 1;
+//                            break;
+//                        case "2":
+//                            gp.enemyM.enemiesInit(i, j, mapTileMark);
+//                            mapTileNum[i][j] = 1;
+//                            break;
                     }
                 }
             }
