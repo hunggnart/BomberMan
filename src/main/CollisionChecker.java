@@ -39,9 +39,6 @@ public class CollisionChecker {
 
                 if (gp.tileM.tile[tileNum1].conclusion || gp.tileM.tile[tileNum2].conclusion) {
                     entity.collisionOn = true;
-                    if (entity instanceof Player) {
-                        entity.x += entity.speed;
-                    }
                 }
                 break;
             case "down":
@@ -51,9 +48,6 @@ public class CollisionChecker {
 
                 if (gp.tileM.tile[tileNum1].conclusion || gp.tileM.tile[tileNum2].conclusion) {
                     entity.collisionOn = true;
-                    if (entity instanceof Player) {
-                        entity.x++;
-                    }
                 }
                 break;
             case "left":
@@ -63,9 +57,6 @@ public class CollisionChecker {
 
                 if (gp.tileM.tile[tileNum1].conclusion || gp.tileM.tile[tileNum2].conclusion) {
                     entity.collisionOn = true;
-                    if (entity instanceof Player) {
-                        entity.y--;
-                    }
                 }
                 break;
             case "right":
@@ -75,9 +66,6 @@ public class CollisionChecker {
 
                 if (gp.tileM.tile[tileNum1].conclusion || gp.tileM.tile[tileNum2].conclusion) {
                     entity.collisionOn = true;
-                    if (entity instanceof Player) {
-                        entity.y--;
-                    }
                 }
                 break;
         }

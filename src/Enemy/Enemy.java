@@ -12,16 +12,16 @@ import java.util.Random;
 public class Enemy extends Entity {
 
     GamePanel gp;
-
     String[] directions;
-
     int directionCounter = 0;
-
     Random generator = new Random();
-
     int directionsNum = 0;
     public boolean isDead = false;
-
+    boolean findNewWay;
+    int leftX;
+    int upY;
+    int rightX;
+    int downY;
     public BufferedImage up, up1, up2, left, left1, left2, right, right1, right2, down, down1, down2;
 
     public Enemy(GamePanel gp) {
@@ -31,7 +31,7 @@ public class Enemy extends Entity {
     }
 
     public void setDefaulValue() {
-        solidArea = new Rectangle(1, 1, 14 * gp.scale, 14 * gp.scale);
+        solidArea = new Rectangle(2 * gp.scale, 2 * gp.scale, 12 * gp.scale, 12 * gp.scale);
         solidAreaDefaulX = solidArea.x;
         solidAreaDefaulY = solidArea.y;
         directionsNum = 0;
@@ -41,6 +41,7 @@ public class Enemy extends Entity {
         directions[2] = "left";
         directions[3] = "right";
         direction = directions[directionsNum];
+        findNewWay = false;
     }
 
     public void getEnemeImage() {

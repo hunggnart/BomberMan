@@ -17,7 +17,6 @@ public class Balloom extends Enemy {
     }
 
     @Override
-
     public void getEnemeImage() {
         try {
             left = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left1.png"));
@@ -27,11 +26,11 @@ public class Balloom extends Enemy {
             right1 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_right2.png"));
             right2 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_right3.png"));
             up = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left1.png"));
-            up1 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left1.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left2.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left3.png"));
             down = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left1.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left1.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left2.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("/Enemy/Balloon/balloom_left3.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,13 +47,9 @@ public class Balloom extends Enemy {
         gp.cChecker.checkTile(this);
         //Check bomb
         gp.cChecker.checkBombVsEnemy(this);
-        //If collisionOn is true
-        if (collisionOn) {
-            directionsNum = generator.nextInt(4) + 0;
-            direction = directions[directionsNum];
-        }
+        //Make move
+        move();
         //If collisionOn is false
-
         if (!collisionOn) {
             switch (direction) {
                 case "up":
@@ -79,6 +74,13 @@ public class Balloom extends Enemy {
                 }
                 spriteCounter = 0;
             }
+        }
+    }
+
+    private void move(){
+        if(collisionOn){
+            direction = gp.findWayEnemy.FindWayForEnemy1((this.y + gp.tileSize / 2) / gp.tileSize,
+                    (this.x + gp.tileSize / 2) / gp.tileSize);
         }
     }
 }

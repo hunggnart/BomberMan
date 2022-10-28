@@ -24,7 +24,7 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        solidArea = new Rectangle(5 * gp.scale, 7 * gp.scale, 6 * gp.scale, 7 * gp.scale);
+        solidArea = new Rectangle(5 * gp.scale, 5 * gp.scale, 8 * gp.scale, 8 * gp.scale);
         solidAreaDefaulX = solidArea.x;
         solidAreaDefaulY = solidArea.y;
         x = gp.tileSize;
@@ -59,7 +59,7 @@ public class Player extends Entity {
     public void update() {
         if (isDead) {
             frameDead++;
-            if (frameDead > 30) {
+            if (frameDead > 40) {
                 countEndDead++;
                 frameDead = 0;
                 if (countEndDead == 3) {
@@ -69,7 +69,7 @@ public class Player extends Entity {
             }
 
             spriteCounter++;
-            if (spriteCounter > 30) {
+            if (spriteCounter > 40) {
                 spriteNum++;
                 if (spriteNum > 3) {
                     spriteNum = 1;

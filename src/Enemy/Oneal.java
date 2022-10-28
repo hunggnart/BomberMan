@@ -38,6 +38,10 @@ public class Oneal extends Enemy {
     }
 
     public void update() {
+        leftX = (this.x + 2) / gp.tileSize;
+        upY = (this.y + 2) / gp.tileSize;
+        rightX = ((this.x - 2) + gp.tileSize) / gp.tileSize;
+        downY = ((this.y - 2) + gp.tileSize) / gp.tileSize;
         //Check dead
         isDead = gp.cChecker.checkEntityVsFlame(this);
         if (isDead) {
@@ -49,11 +53,13 @@ public class Oneal extends Enemy {
         //Check bomb
         gp.cChecker.checkBombVsEnemy(this);
         //If collisionOn = true;
-
-        if (collisionOn) {
-            directionsNum = generator.nextInt(4);
-            direction = directions[directionsNum];
+        if ((gp.player.x - this.x <= (gp.tileSize * 5) && gp.player.x - this.x >= -(gp.tileSize * 5)) ||
+                (gp.player.y - this.y <= (gp.tileSize * 5) && gp.player.y - this.y >= (gp.tileSize * 5))) {
+            moveToPursue();
+        } else {
+            moveNotPursue();
         }
+
 
         //If collisionOn is false
 
@@ -84,13 +90,185 @@ public class Oneal extends Enemy {
             }
 
         }
+    }
 
-        directionCounter++;
-        if (directionCounter > 500) {
+    private void moveNotPursue() {
+        String way = gp.findWayEnemy.FindWayForEnemy1((this.y + gp.tileSize / 2) / gp.tileSize,
+                (this.x + gp.tileSize / 2) / gp.tileSize);
+        if (collisionOn) {
+            direction = way;
+        }
+        switch (direction) {
+            case "up":
+                if (upY != downY) {
+                    direction = "up";
+                    findNewWay = true;
+                } else if (findNewWay) {
+                    direction = way;
+                    findNewWay = false;
+                }
+                break;
+            case "down":
+                if (upY != downY) {
+                    direction = "down";
+                    findNewWay = true;
+                } else if (findNewWay) {
+                    direction = way;
+                    findNewWay = false;
+                }
+                break;
+            case "left":
+                if (leftX != rightX) {
+                    direction = "left";
+                    findNewWay = true;
+                } else if (findNewWay) {
+                    direction = way;
+                    findNewWay = false;
+                }
+                break;
+            case "right":
+                if (leftX != rightX) {
+                    direction = "right";
+                    findNewWay = true;
+                } else if (findNewWay) {
+                    direction = way;
+                    findNewWay = false;
+                }
+                break;
+        }
+    }
+
+    private void moveToPursue() {
+        if (collisionOn) {
             directionsNum = generator.nextInt(4);
-            speed = generator.nextInt(3) + 1;
             direction = directions[directionsNum];
-            directionCounter = 0;
+            switch (direction) {
+                case "up":
+                    if (upY != downY) {
+                        direction = "up";
+                        findNewWay = true;
+                    } else if (findNewWay) {
+                        directionsNum = generator.nextInt(4);
+                        direction = directions[directionsNum];
+                        findNewWay = false;
+                    }
+                    break;
+                case "down":
+                    if (upY != downY) {
+                        direction = "down";
+                        findNewWay = true;
+                    } else if (findNewWay) {
+                        directionsNum = generator.nextInt(4);
+                        direction = directions[directionsNum];
+                        findNewWay = false;
+                    }
+                    break;
+                case "left":
+                    if (leftX != rightX) {
+                        direction = "left";
+                        findNewWay = true;
+                    } else if (findNewWay) {
+                        directionsNum = generator.nextInt(4);
+                        direction = directions[directionsNum];
+                        findNewWay = false;
+                    }
+                    break;
+                case "right":
+                    if (leftX != rightX) {
+                        direction = "right";
+                        findNewWay = true;
+                    } else if (findNewWay) {
+                        directionsNum = generator.nextInt(4);
+                        direction = directions[directionsNum];
+                        findNewWay = false;
+                    }
+                    break;
+            }
+        } else {
+            String way = gp.findWayEnemy.FindWayForEnemy((this.y + gp.tileSize / 2) / gp.tileSize, (this.x + gp.tileSize / 2) / gp.tileSize);
+            if (way.equals("none")) {
+                switch (direction) {
+                    case "up":
+                        if (upY != downY) {
+                            direction = "up";
+                            findNewWay = true;
+                        } else if (findNewWay) {
+                            directionsNum = generator.nextInt(4);
+                            direction = directions[directionsNum];
+                            findNewWay = false;
+                        }
+                        break;
+                    case "down":
+                        if (upY != downY) {
+                            direction = "down";
+                            findNewWay = true;
+                        } else if (findNewWay) {
+                            directionsNum = generator.nextInt(4);
+                            direction = directions[directionsNum];
+                            findNewWay = false;
+                        }
+                        break;
+                    case "left":
+                        if (leftX != rightX) {
+                            direction = "left";
+                            findNewWay = true;
+                        } else if (findNewWay) {
+                            directionsNum = generator.nextInt(4);
+                            direction = directions[directionsNum];
+                            findNewWay = false;
+                        }
+                        break;
+                    case "right":
+                        if (leftX != rightX) {
+                            direction = "right";
+                            findNewWay = true;
+                        } else if (findNewWay) {
+                            directionsNum = generator.nextInt(4);
+                            direction = directions[directionsNum];
+                            findNewWay = false;
+                        }
+                        break;
+                }
+            } else {
+                switch (direction) {
+                    case "up":
+                        if (upY != downY) {
+                            direction = "up";
+                            findNewWay = true;
+                        } else if (findNewWay) {
+                            direction = way;
+                            findNewWay = false;
+                        }
+                        break;
+                    case "down":
+                        if (upY != downY) {
+                            direction = "down";
+                            findNewWay = true;
+                        } else if (findNewWay) {
+                            direction = way;
+                            findNewWay = false;
+                        }
+                        break;
+                    case "left":
+                        if (leftX != rightX) {
+                            direction = "left";
+                            findNewWay = true;
+                        } else if (findNewWay) {
+                            direction = way;
+                            findNewWay = false;
+                        }
+                        break;
+                    case "right":
+                        if (leftX != rightX) {
+                            direction = "right";
+                            findNewWay = true;
+                        } else if (findNewWay) {
+                            direction = way;
+                            findNewWay = false;
+                        }
+                        break;
+                }
+            }
         }
     }
 }

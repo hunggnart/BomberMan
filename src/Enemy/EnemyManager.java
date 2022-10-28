@@ -37,6 +37,15 @@ public class EnemyManager {
             case "5":
                 e = new Minvo(gp);
                 break;
+            case "6":
+                e = new Ovape(gp);
+                break;
+            case "7":
+                e = new Pass(gp);
+                break;
+            case "8":
+                e = new Pontan(gp);
+                break;
         }
         e.x = j * gp.tileSize;
         e.y = i * gp.tileSize;
