@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
-    public final int scale = 3;
+    public final int scale = 2;
     public final int menuState = 0;
     public final int playState = 1;
     public final int endState = 2;
@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxScreenCol = 31;
     public final int maxScreenRow = 13;
     final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
+    final int screenHeight = tileSize * maxScreenRow + tileSize;
     final int FPS = 60;
     UI ui = new UI(this);
     KeyHandler keyH = new KeyHandler(this);
