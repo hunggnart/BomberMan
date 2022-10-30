@@ -18,7 +18,7 @@ public class Pontan extends Enemy {
     }
 
     public void setValue() {
-        speed = 1;
+        speed = 3;
         timeToChange = 0;
         cl = 0;
     }
@@ -67,39 +67,77 @@ public class Pontan extends Enemy {
         //Check bomb
         gp.cChecker.checkBombVsEnemy(this);
         //Make move
+        leftX = (this.x + 2) / gp.tileSize;
+        upY = (this.y + 2) / gp.tileSize;
+        rightX = ((this.x - 2) + gp.tileSize) / gp.tileSize;
+        downY = ((this.y - 2) + gp.tileSize) / gp.tileSize;
         move();
         //If collisionOn is false
-        if (!collisionOn) {
-            switch (direction) {
-                case "up":
-                    y -= speed;
-                    break;
-                case "down":
-                    y += speed;
-                    break;
-                case "right":
-                    x += speed;
-                    break;
-                case "left":
-                    x -= speed;
-                    break;
-            }
+        switch (direction) {
+            case "up":
+                y -= speed;
+                break;
+            case "down":
+                y += speed;
+                break;
+            case "right":
+                x += speed;
+                break;
+            case "left":
+                x -= speed;
+                break;
+        }
 
-            spriteCounter++;
-            if (spriteCounter > 10) {
-                spriteNum++;
-                if (spriteNum > 3) {
-                    spriteNum = 1;
-                }
-                spriteCounter = 0;
+        spriteCounter++;
+        if (spriteCounter > 10) {
+            spriteNum++;
+            if (spriteNum > 3) {
+                spriteNum = 1;
             }
+            spriteCounter = 0;
         }
     }
 
     private void move() {
-        if (collisionOn) {
-            direction = gp.findWayEnemy.FindWayForEnemy1((this.y + gp.tileSize / 2) / gp.tileSize,
-                    (this.x + gp.tileSize / 2) / gp.tileSize);
+        String way = gp.findWayEnemy.FindWayForEnemy3((this.y + gp.tileSize / 2) / gp.tileSize,
+                (this.x + gp.tileSize / 2) / gp.tileSize);
+        switch (direction) {
+            case "up":
+                if (upY != downY) {
+                    direction = "up";
+                    findNewWay = true;
+                } else if (findNewWay) {
+                    direction = way;
+                    findNewWay = false;
+                }
+                break;
+            case "down":
+                if (upY != downY) {
+                    direction = "down";
+                    findNewWay = true;
+                } else if (findNewWay) {
+                    direction = way;
+                    findNewWay = false;
+                }
+                break;
+            case "left":
+                if (leftX != rightX) {
+                    direction = "left";
+                    findNewWay = true;
+                } else if (findNewWay) {
+                    direction = way;
+                    findNewWay = false;
+                }
+                break;
+            case "right":
+                if (leftX != rightX) {
+                    direction = "right";
+                    findNewWay = true;
+                } else if (findNewWay) {
+                    direction = way;
+                    findNewWay = false;
+                }
+                break;
         }
     }
 

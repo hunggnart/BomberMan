@@ -13,6 +13,7 @@ public class Player extends Entity {
     KeyHandler keyH;
     public BufferedImage up, up1, up2, down, down1, down2, left, left1, left2, right, right1, right2, dead, dead1, dead2;
     public boolean isDead = false;
+    public boolean isWin = false;
     public boolean deadEnd = false;
     int frameDead = 0, countEndDead = 0;
 
@@ -79,6 +80,10 @@ public class Player extends Entity {
         } else {
             isDead = gp.cChecker.checkEntityVsFlame(this);
             gp.cChecker.checkEnemy(this, true);
+            if (gp.enemyM.enemies.size() == 0 && (this.x + gp.tileSize / 2) / gp.tileSize == gp.tileM.portal.x / gp.tileSize
+                    && (this.y + gp.tileSize / 2) / gp.tileSize == gp.tileM.portal.y / gp.tileSize) {
+                isWin = true;
+            }
             if (keyH.leftPress || keyH.rightPress || keyH.upPress || keyH.downPress) {
                 if (keyH.upPress) {
                     direction = "up";

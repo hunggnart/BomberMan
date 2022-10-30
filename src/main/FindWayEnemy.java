@@ -5,12 +5,14 @@ import java.util.*;
 public class FindWayEnemy {
     public GamePanel gp;
     Random generator = new Random();
-    public FindWayEnemy(GamePanel gp){
+
+    public FindWayEnemy(GamePanel gp) {
         this.gp = gp;
     }
 
     static class pair {
         public int first, second;
+
         public pair(int first, int second) {
             this.first = first;
             this.second = second;
@@ -40,7 +42,7 @@ public class FindWayEnemy {
     }
 
     static boolean isValid2(int grid[][], boolean vis[][],
-                           int row, int col, int tagetX, int tagetY) {
+                            int row, int col, int tagetX, int tagetY) {
         if (row >= 0 && col >= 0 &&
                 row < ROW && col < COL && !vis[row][col] &&
                 row == tagetX && col == tagetY)
@@ -107,7 +109,7 @@ public class FindWayEnemy {
     }
 
     static String BFS2(int grid[][], boolean vis[][], String way[][],
-                      int row, int col, int tagetRow, int tagetCol) {
+                       int row, int col, int tagetRow, int tagetCol) {
 
         // Stores indices of the matrix cells
         Queue<pair> q = new LinkedList<>();
@@ -170,7 +172,7 @@ public class FindWayEnemy {
             }
         }
 
-        for(int i = 0; i < gp.bombM.bombs.size(); i++){
+        for (int i = 0; i < gp.bombM.bombs.size(); i++) {
             map[gp.bombM.bombs.get(i).y / gp.tileSize][gp.bombM.bombs.get(i).x / gp.tileSize] = 9;
         }
         int tagetRow = (gp.player.y + gp.tileSize / 2) / gp.tileSize;
@@ -193,21 +195,55 @@ public class FindWayEnemy {
             }
         }
 
-        for(int i = 0; i < gp.bombM.bombs.size(); i++){
+        for (int i = 0; i < gp.bombM.bombs.size(); i++) {
             map[gp.bombM.bombs.get(i).y / gp.tileSize][gp.bombM.bombs.get(i).x / gp.tileSize] = 9;
         }
 
-        if(map[x+1][y] == 1){
+        if (map[x + 1][y] == 1) {
             ways.add("down");
         }
 
-        if (map[x-1][y] == 1){
+        if (map[x - 1][y] == 1) {
             ways.add("up");
         }
-        if(map[x][y+1] == 1){
+        if (map[x][y + 1] == 1) {
             ways.add("right");
         }
-        if(map[x][y-1] == 1){
+        if (map[x][y - 1] == 1) {
+            ways.add("left");
+        }
+        rs = ways.get(generator.nextInt(ways.size()));
+        return rs;
+    }
+
+    public String FindWayForEnemy3(int x, int y) {
+        String rs = "";
+        List<String> ways = new ArrayList<String>();
+        int[][] map = new int[gp.maxScreenRow][gp.maxScreenCol];
+        ROW = gp.maxScreenRow;
+        COL = gp.maxScreenCol;
+
+        for (int i = 0; i < gp.maxScreenRow; i++) {
+            for (int j = 0; j < gp.maxScreenCol; j++) {
+                map[i][j] = gp.tileM.mapTileNum[i][j];
+            }
+        }
+
+        for (int i = 0; i < gp.bombM.bombs.size(); i++) {
+            map[gp.bombM.bombs.get(i).y / gp.tileSize][gp.bombM.bombs.get(i).x / gp.tileSize] = 9;
+        }
+
+        if (map[x + 1][y] == 1 || map[x + 1][y] == 0) {
+            ways.add("down");
+        }
+
+        if (map[x - 1][y] == 1 || map[x - 1][y] == 0) {
+            ways.add("up");
+        }
+        if (map[x][y + 1] == 1 || map[x][y + 1] == 0) {
+            ways.add("right");
+        }
+        if (map[x][y - 1] == 1 || map[x][y - 1] == 0) {
             ways.add("left");
         }
         rs = ways.get(generator.nextInt(ways.size()));
@@ -230,7 +266,7 @@ public class FindWayEnemy {
             }
         }
 
-        for(int i = 0; i < gp.bombM.bombs.size(); i++){
+        for (int i = 0; i < gp.bombM.bombs.size(); i++) {
             map[gp.bombM.bombs.get(i).y / gp.tileSize][gp.bombM.bombs.get(i).x / gp.tileSize] = 9;
         }
         int tagetRow = (gp.player.y + gp.tileSize / 2) / gp.tileSize;

@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player;
     public BombManager bombM;
     public EnemyManager enemyM;
-    TileManager tileM;
+    public TileManager tileM;
     Thread gameThread;
     Sound se;
     Sound music;
