@@ -6,5 +6,5 @@
    -    Đặng Văn Khởi  - 21020770
 # Hướng dẫn sử dụng:
 ##
-* Dùng phím mũi tên và enter trong để sử dụng các tùy chọn trong các manu
+* Dùng phím mũi tên và enter trong để sử dụng các tùy chọn trong các menu.
 * Dùng các phím A,W,S,D,space để điều khiển trong trò chơi, ESC để tạm dừng.
