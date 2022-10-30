@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
-    public final int scale = 2;
+    public final int scale = 5;
     public final int menuState = 0;
     public final int playState = 1;
     public final int endState = 2;

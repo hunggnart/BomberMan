@@ -212,6 +212,9 @@ public class FindWayEnemy {
         if (map[x][y - 1] == 1) {
             ways.add("left");
         }
+        if (ways.size() == 0) {
+            return "up";
+        }
         rs = ways.get(generator.nextInt(ways.size()));
         return rs;
     }

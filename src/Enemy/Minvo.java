@@ -38,7 +38,7 @@ public class Minvo extends Enemy {
     }
 
     public void update() {
-        int isPursue = generator.nextInt(3);
+        int isPursue = generator.nextInt(100);
         isDead = gp.cChecker.checkEntityVsFlame(this);
         if (isDead) {
             gp.explode.endInit(this.x, this.y);
@@ -54,7 +54,7 @@ public class Minvo extends Enemy {
         //Check bomb
         gp.cChecker.checkBombVsEnemy(this);
         //If collisionOn is false
-        if (isPursue == 1) {
+        if (isPursue <= 80) {
             moveToPursue();
         } else {
             moveNotPursue();
