@@ -14,11 +14,26 @@ public class UI {
     public int menuNum = 0;
     public int pauseNum = 0;
     public int overNum = 0;
+    public int countFrame = 0;
+    public int countNum = 0;
+    BufferedImage image1, image2, image3;
 
 
     public UI(GamePanel gp) {
         this.gp = gp;
         arial = new Font("Arial", Font.BOLD, 40);
+        loadImage();
+    }
+
+    public void loadImage() {
+        try {
+            image1 = ImageIO.read(getClass().getResourceAsStream("/ui/player_right.png"));
+            image2 = ImageIO.read(getClass().getResourceAsStream("/ui/player_right_1.png"));
+            image3 = ImageIO.read(getClass().getResourceAsStream("/ui/player_right_2.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void reset() {
@@ -27,6 +42,18 @@ public class UI {
         overNum = 0;
     }
 
+    public void update() {
+        countFrame++;
+        if (countFrame == 20) {
+            countFrame = 0;
+            countNum++;
+            {
+                if (countNum > 2) {
+                    countNum = 0;
+                }
+            }
+        }
+    }
 
     public void draw(int gameState, Graphics2D g2) {
         switch (gameState) {
@@ -41,10 +68,13 @@ public class UI {
                 drawEnd(g2);
                 break;
             case 3:
-                drawPlay(g2);
                 drawPause(g2);
                 break;
         }
+        if (gp.gameState == gp.winState) {
+            drawWinStage(g2);
+        }
+
     }
 
     public void drawMenu(Graphics2D g2) {
@@ -164,7 +194,7 @@ public class UI {
 
         g2.drawImage(image, 0, 0, gp.screenWidth, gp.screenHeight, null);
 
-        y+=20;
+        y += 20;
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20F));
         text = "Your score:";
         g2.setColor(Color.red);
@@ -198,6 +228,31 @@ public class UI {
         g2.drawString(text, x, y);
 
     }
+
+    public void drawWinStage(Graphics2D g2) {
+        BufferedImage image = null;
+        switch (countNum) {
+            case 0:
+                image = image1;
+                break;
+            case 1:
+                image = image2;
+                break;
+            case 2:
+                image = image3;
+                break;
+
+        }
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
+        g2.drawImage(image, gp.screenWidth / 2, gp.screenHeight / 2, gp.tileSize, gp.tileSize, null);
+        String text;
+        text = "Congratulation! Press enter to continue...";
+        g2.setColor(Color.YELLOW);
+        g2.drawString(text, getXCenter(text, g2), gp.screenHeight / 4);
+        text="=========================================>";
+        g2.drawString(text,getXCenter(text,g2),gp.screenHeight/2+60);
+    }
+
 
     public int getXCenter(String text, Graphics2D g2) {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();

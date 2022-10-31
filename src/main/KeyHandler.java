@@ -96,6 +96,7 @@ public class KeyHandler implements KeyListener {
                         break;
                     case 1:
                         gp.changeGameState(gp.menuState);
+                        gp.ui.reset();
                         gp.stopMusic();
                         break;
                 }
@@ -109,12 +110,16 @@ public class KeyHandler implements KeyListener {
                         break;
                     case 1:
                         gp.changeGameState(gp.menuState);
+                        gp.ui.reset();
                         gp.stopMusic();
                         break;
                     case 2:
                         System.exit(0);
                         break;
                 }
+            }
+            if(gp.gameState==gp.winState) {
+                //next level
             }
         }
 

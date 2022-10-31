@@ -12,11 +12,12 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
-    public final int scale = 5;
+    public final int scale = 2;
     public final int menuState = 0;
     public final int playState = 1;
     public final int endState = 2;
     public final int pauseState = 3;
+    public final int winState = 4;
     public int gameState = menuState;
     public final int winPortal = 9;
     public final int tileSize = originalTileSize * scale;
@@ -113,7 +114,17 @@ public class GamePanel extends JPanel implements Runnable {
                 stopMusic();
                 player.isDead = false;
             }
+            if(player.isWin) {
+                stopMusic();
+                changeGameState(winState);
+                player.isWin=false;
+            }
+            if(info.max_time==0){
+                stopMusic();
+                changeGameState(endState);
+            }
         }
+        ui.update();
     }
 
     public void paintComponent(Graphics g) {
